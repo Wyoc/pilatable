@@ -8,9 +8,9 @@
 //
 // The rich UI lives in the hosted config page (config/index.html), NOT here.
 
-// TODO: replace with the deployed static URL (e.g. GitHub Pages). For local
-// dev you can host config/ and point this at it.
-var CONFIG_URL = 'https://example.com/pilatable/config/index.html';
+// The config page is deployed to GitHub Pages from pebble-pilates/config/
+// (see .github/workflows/pages.yml). index.html is served at the site root.
+var CONFIG_URL = 'https://wyoc.github.io/pilatable/';
 
 var STORAGE_KEY = 'pilatable.session.v1';
 
