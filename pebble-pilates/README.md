@@ -45,9 +45,14 @@ returns it to the JS, which persists it to `localStorage` and pushes it to the w
   scaling breath disc, 1-vs-2 buzz `VibePattern`s gated by settings, button nav
   (prev / pause-resume / skip / back), cycles bar, rest countdown with NEXT UP.
 
-### Device follow-ups (need the real PT2)
-- **Color tuning:** the design's pastel tokens collapse under emery's 64-color
-  palette; `runner.c` uses palette-friendly substitutes. Validate/tune on-device.
-- **Haptics feel:** confirm the 1-vs-2 buzz distinction + intensity mapping on the motor.
-- **Fonts:** drop in Fredoka (`resources/fonts/`) to replace the system fonts on the hero glyphs.
-- **Breath ring redraw cadence** (currently ~5 Hz) vs e-paper readability.
+- **Fonts:** ✅ Fredoka (Medium, OFL) bundled subsetted at 38px (count/timer) and
+  18px (phase label, cycles, next-up name); small UI labels use system Gothic.
+- **Colors:** `runner.c` uses a deliberate 64-color-palette mapping (the design's
+  pastels collapse under emery's 4-levels-per-channel); validated in the emulator.
+- **Haptics:** 1-vs-2 buzz `VibePattern`s tuned per intensity with a tight gap so
+  the double reads as two taps.
+
+### Final tuning (needs the real PT2 panel/motor)
+- Confirm color choices and the 1-vs-2 buzz *feel* on hardware; values are good
+  baselines but the physical panel/motor may warrant nudges.
+- Breath-ring redraw cadence (~5 Hz) vs e-paper readability.
