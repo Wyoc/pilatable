@@ -22,19 +22,20 @@ function loadStored() {
     console.log('Pilatable: failed to parse stored session: ' + e);
   }
   // Default mirrors the watch's baked-in fallback so a fresh install syncs sanely.
+  var IE = ['inhale', 'exhale'], EI = ['exhale', 'inhale'], EIE = ['exhale', 'inhale', 'exhale'];
   return {
-    version: 1,
+    version: 2,
     name: 'Fundamental Mat',
     settings: { hapticsEnabled: true, intensity: 1, leadInEnabled: true },
     items: [
-      { name: 'Pelvic Curl', reps: 5, movementLengthSec: 5.0, restAfterSec: 30 },
-      { name: 'Chest Lift', reps: 10, movementLengthSec: 4.0, restAfterSec: 30 },
-      { name: 'Leg Lift Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30 },
-      { name: 'Spine Twist Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30 },
-      { name: 'Chest Lift With Rotation', reps: 5, movementLengthSec: 4.0, restAfterSec: 30 },
-      { name: 'Back Extension Prone', reps: 5, movementLengthSec: 5.0, restAfterSec: 30 },
-      { name: 'One-Leg Circle', reps: 5, movementLengthSec: 4.0, restAfterSec: 30 },
-      { name: 'Rolling Back', reps: 10, movementLengthSec: 4.0, restAfterSec: 0 }
+      { name: 'Pelvic Curl', reps: 5, movementLengthSec: 5.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EIE },
+      { name: 'Chest Lift', reps: 10, movementLengthSec: 4.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EIE },
+      { name: 'Leg Lift Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EI },
+      { name: 'Spine Twist Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EI },
+      { name: 'Chest Lift With Rotation', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EI },
+      { name: 'Back Extension Prone', reps: 5, movementLengthSec: 5.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EI },
+      { name: 'One-Leg Circle', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, betweenRepsSec: 1, breathPattern: EI },
+      { name: 'Rolling Back', reps: 10, movementLengthSec: 4.0, restAfterSec: 0, betweenRepsSec: 1, breathPattern: IE }
     ]
   };
 }
@@ -60,12 +61,19 @@ function sendSession(session) {
       return;
     }
     var it = session.items[i];
+    var pattern = (it.breathPattern && it.breathPattern.length)
+      ? it.breathPattern.map(function (p) { return p.charAt(0).toUpperCase(); }).join('')
+      : 'IE';
+    var mode = it.mode === 'hundred' ? 1 : it.mode === 'continuous' ? 2 : 0;
     Pebble.sendAppMessage({
       CHUNK_INDEX: i,
       ITEM_NAME: it.name,
       ITEM_REPS: it.reps || 0,
       ITEM_LENGTH_DS: Math.round((it.movementLengthSec || 0) * 10),
-      ITEM_REST: it.restAfterSec || 0
+      ITEM_REST: it.restAfterSec || 0,
+      ITEM_BETWEEN_DS: Math.round((it.betweenRepsSec == null ? 1 : it.betweenRepsSec) * 10),
+      ITEM_MODE: mode,
+      ITEM_PATTERN: pattern
     }, function () { sendItem(i + 1); },
        function (e) { console.log('Pilatable: item ' + i + ' send failed: ' + JSON.stringify(e)); });
   }
