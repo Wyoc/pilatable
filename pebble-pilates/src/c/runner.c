@@ -570,6 +570,15 @@ void runner_init(const Session *session, const Settings *settings) {
   s_paused = false;
 }
 
+void runner_apply_session(const Session *session, const Settings *settings) {
+  if (s_phase != PHASE_READY) return;  // don't disrupt a workout in progress
+  s_session = *session;
+  s_settings = *settings;
+  s_overview_top = 0;
+  if (s_canvas) layer_mark_dirty(s_canvas);
+  APP_LOG(APP_LOG_LEVEL_INFO, "Applied synced session '%s' on the review screen", s_session.name);
+}
+
 void runner_push(void) {
   s_window = window_create();
   window_set_background_color(s_window, C_BG);
