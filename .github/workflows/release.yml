@@ -1,0 +1,78 @@
+name: Build & release watchapp
+
+# Builds + publishes the Pebble watchapp ONLY when a version tag is pushed.
+# The watchapp version is pinned to the tag (vX.Y.Z -> X.Y.Z) so the shipped
+# .pbw always reports the tag's version.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write   # needed to create the GitHub Release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Derive version from tag
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+(\.[0-9]+)?$'; then
+            echo "::error::Tag '$TAG' must look like vMAJOR.MINOR[.PATCH] (e.g. v1.2.3)"
+            exit 1
+          fi
+          echo "Tag $TAG -> watchapp version $VERSION"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Pin watchapp version to the tag
+        run: |
+          cd pebble-pilates
+          jq --arg v "$VERSION" '.version = $v' package.json > package.json.tmp
+          mv package.json.tmp package.json
+          echo "package.json version is now $(jq -r .version package.json)"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install Pebble tool + SDK
+        run: |
+          # Make the SDK install non-interactive (skip first-run analytics prompt).
+          mkdir -p "$HOME/.pebble-sdk" && touch "$HOME/.pebble-sdk/NO_TRACKING"
+          uv tool install pebble-tool --python 3.13
+          export PATH="$HOME/.local/bin:$PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          pebble --version
+          yes "" | pebble sdk install latest || pebble sdk install latest
+
+      - name: Build watchapp
+        run: |
+          cd pebble-pilates
+          pebble build
+
+      - name: Verify built version matches the tag
+        run: |
+          BUILT=$(jq -r '.versionLabel' pebble-pilates/build/appinfo.json)
+          echo "Built versionLabel=$BUILT, tag version=$VERSION"
+          if [ "$BUILT" != "$VERSION" ]; then
+            echo "::error::Built watchapp version ($BUILT) != tag ($VERSION)"
+            exit 1
+          fi
+
+      - name: Name the artifact with the version
+        run: cp pebble-pilates/build/pebble-pilates.pbw "pilatable-${VERSION}.pbw"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilatable-${{ env.VERSION }}
+          path: pilatable-${{ env.VERSION }}.pbw
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: pilatable-${{ env.VERSION }}.pbw
+          generate_release_notes: true

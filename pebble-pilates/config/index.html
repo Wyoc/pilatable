@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Pilatable</title>
+<style>
+  :root { --purple:#7A3DA8; --tint:#F0E7F6; --bg:#FBF7F1; --card:#fff;
+          --border:#F0E8DD; --ink:#2C2620; --muted:#8C8278; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         background:var(--bg); color:var(--ink); padding:18px; }
+  .eyebrow { font-size:11px; font-weight:800; letter-spacing:2px; color:#A99F94; }
+  h1 { font-size:26px; margin:4px 0 12px; }
+  .item { background:var(--card); border:1px solid var(--border); border-radius:13px;
+          padding:10px 12px; margin-bottom:8px; }
+  .cta { position:sticky; bottom:0; width:100%; background:var(--purple); color:#fff;
+         border:none; border-radius:16px; padding:14px; font-size:16px; margin-top:12px; }
+  .note { background:var(--tint); color:#5E2E84; border-radius:12px; padding:10px 12px;
+          font-size:13px; margin-bottom:12px; }
+</style>
+</head>
+<body>
+  <div class="eyebrow">PILATES · MAT WORK</div>
+  <h1 id="title">Session</h1>
+  <div class="note">
+    Scaffold config page. Build-order step 3 replaces this with the full
+    Library → Configure → Breathing &amp; Buzz → Session Ready flow.
+    For now it round-trips the seeded session back to the watch.
+  </div>
+  <div id="items"></div>
+  <button class="cta" id="save">Save &amp; send to watch</button>
+
+<script>
+  function getParam(name) {
+    var m = new RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  var session;
+  try { session = JSON.parse(getParam('session')); } catch (e) { session = null; }
+  if (!session) {
+    session = { version:1, name:'Fundamental Mat',
+      settings:{ hapticsEnabled:true, intensity:1, leadInEnabled:true }, items:[] };
+  }
+
+  document.getElementById('title').textContent = session.name;
+  var box = document.getElementById('items');
+  (session.items || []).forEach(function (it, i) {
+    var d = document.createElement('div');
+    d.className = 'item';
+    d.textContent = (i + 1) + '. ' + it.name + ' — ' + it.reps + ' reps · '
+                    + it.movementLengthSec + 's · rest ' + it.restAfterSec + 's';
+    box.appendChild(d);
+  });
+
+  document.getElementById('save').addEventListener('click', function () {
+    // Return the session to the PebbleKit JS via the close URL.
+    var payload = encodeURIComponent(JSON.stringify(session));
+    document.location = 'pebblejs://close#' + payload;
+  });
+</script>
+</body>
+</html>
