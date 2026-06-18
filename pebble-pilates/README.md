@@ -1,7 +1,7 @@
 # Pilatable — Pebble Time 2 watchapp + config page
 
 Watchapp (C, target `emery`) for the Pilates mat trainer, plus the PebbleKit JS
-bridge and a hosted configuration page. See `../PLAN.md` for the full plan.
+bridge and a hosted configuration page.
 
 ## Layout
 

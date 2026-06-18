@@ -17,3 +17,6 @@ extracted/
 # Claude Code
 .claude/
 CLAUDE.local.md
+
+# Internal planning doc (not published)
+PLAN.md

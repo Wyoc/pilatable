@@ -9,8 +9,7 @@ A Pilates mat trainer for the **Pebble Time 2** smartwatch.
   mobile app) to browse exercises, build a session, set haptic preferences, and
   sync it to the watch. No separate native app required.
 
-See **[PLAN.md](PLAN.md)** for the full architecture and build plan, and
-**[pebble-pilates/README.md](pebble-pilates/README.md)** for build/run instructions.
+See **[pebble-pilates/README.md](pebble-pilates/README.md)** for build/run instructions.
 
 ## Releases
 
@@ -22,4 +21,4 @@ GitHub Release. See `.github/workflows/release.yml`.
 
 The exercise dataset in the design handoff contains text from a copyrighted book
 and is **not** included in this repository. The shipping app uses original copy
-plus the factual exercise data only. See PLAN.md → "Content".
+plus the factual exercise data only.
