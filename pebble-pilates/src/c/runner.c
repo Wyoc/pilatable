@@ -30,6 +30,7 @@
 #define LEAD_IN_MS 3000
 
 typedef enum {
+  PHASE_READY,    // pre-start plan review; waits for the user to begin
   PHASE_LEAD_IN,
   PHASE_INHALE,
   PHASE_EXHALE,
@@ -52,6 +53,9 @@ static Phase s_phase;
 static uint32_t s_elapsed_ms; // within the current phase
 static int s_last_second;     // for per-second lead-in pulses
 static bool s_paused;
+static uint8_t s_overview_top; // first visible item in the plan-review list
+
+static void tick(void *data);  // forward decl (begin_workout schedules it)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -63,8 +67,23 @@ static uint8_t cur_reps(void) {
   return r == 0 ? 1 : r;
 }
 
+static uint32_t session_est_minutes(void) {
+  int lead = s_settings.lead_in_enabled ? 3 : 0;
+  int secs = 0;
+  for (uint8_t i = 0; i < s_session.item_count; i++) {
+    const SessionItem *it = &s_session.items[i];
+    int reps = it->reps ? it->reps : 1;
+    int mv = it->movement_length_ds / 10;
+    if (mv < 1) mv = 4;
+    secs += lead + reps * 2 * mv + it->rest_after_sec;
+  }
+  int m = secs / 60;
+  return m < 1 ? 1 : m;
+}
+
 static uint32_t phase_duration_ms(void) {
   switch (s_phase) {
+    case PHASE_READY: return 0;
     case PHASE_LEAD_IN: return LEAD_IN_MS;
     case PHASE_INHALE:
     case PHASE_EXHALE: {
@@ -150,9 +169,15 @@ static void advance_phase(void) {
     case PHASE_REST:
       start_item(s_item + 1);
       break;
+    case PHASE_READY:
     case PHASE_DONE:
       break;
   }
+}
+
+static void begin_workout(void) {
+  start_item(0);                       // lead-in (3·2·1) then inhale
+  if (!s_timer) s_timer = app_timer_register(TICK_MS, tick, NULL);
 }
 
 // ---------------------------------------------------------------------------
@@ -205,6 +230,7 @@ static void draw_title_bar(GContext *ctx, GColor bg, const char *title) {
                      GRect(6, 1, 130, TITLE_H), GTextOverflowModeTrailingEllipsis,
                      GTextAlignmentLeft, NULL);
 
+  if (s_phase == PHASE_READY) return;  // no position cursor on the review screen
   char pos[8];
   snprintf(pos, sizeof(pos), "%02d/%02d", s_item + 1, s_session.item_count);
   graphics_draw_text(ctx, pos, fonts_get_system_font(FONT_KEY_GOTHIC_18),
@@ -348,11 +374,57 @@ static void render_done(GContext *ctx) {
                      GTextAlignmentCenter, NULL);
 }
 
+// Plan-review screen shown before the workout starts. Up/Down scroll the move
+// list; Select (▶) begins; Back exits.
+#define OV_TOP 46
+#define OV_BOTTOM 210
+#define OV_ROW 22
+static uint8_t overview_visible(void) { return (OV_BOTTOM - OV_TOP) / OV_ROW; }
+
+static void render_overview(GContext *ctx) {
+  char sub[40];
+  snprintf(sub, sizeof(sub), "%d moves · ~%d min", s_session.item_count, (int)session_est_minutes());
+  graphics_context_set_text_color(ctx, C_MUTED);
+  graphics_draw_text(ctx, sub, fonts_get_system_font(FONT_KEY_GOTHIC_14),
+                     GRect(6, 26, RAIL_X - 12, 18), GTextOverflowModeFill, GTextAlignmentCenter, NULL);
+
+  uint8_t vis = overview_visible();
+  for (uint8_t i = s_overview_top; i < s_session.item_count && i < s_overview_top + vis; i++) {
+    int y = OV_TOP + (i - s_overview_top) * OV_ROW;
+    char num[6];
+    snprintf(num, sizeof(num), "%d", i + 1);
+    graphics_context_set_text_color(ctx, C_PURPLE);
+    graphics_draw_text(ctx, num, s_font_md, GRect(8, y, 22, OV_ROW),
+                       GTextOverflowModeFill, GTextAlignmentLeft, NULL);
+    graphics_context_set_text_color(ctx, C_INK);
+    graphics_draw_text(ctx, s_session.items[i].name, s_font_md, GRect(32, y, 100, OV_ROW),
+                       GTextOverflowModeTrailingEllipsis, GTextAlignmentLeft, NULL);
+    char rp[8];
+    snprintf(rp, sizeof(rp), "x%d", s_session.items[i].reps);
+    graphics_context_set_text_color(ctx, C_MUTED);
+    graphics_draw_text(ctx, rp, fonts_get_system_font(FONT_KEY_GOTHIC_14),
+                       GRect(132, y + 2, RAIL_X - 138, OV_ROW), GTextOverflowModeFill,
+                       GTextAlignmentRight, NULL);
+  }
+  // "more below" affordance: a small downward chevron
+  if (s_overview_top + vis < s_session.item_count) {
+    int cx = (RAIL_X) / 2, cy = OV_BOTTOM + 2;
+    graphics_context_set_stroke_color(ctx, C_MUTED);
+    graphics_context_set_stroke_width(ctx, 2);
+    graphics_draw_line(ctx, GPoint(cx - 5, cy - 3), GPoint(cx, cy + 2));
+    graphics_draw_line(ctx, GPoint(cx, cy + 2), GPoint(cx + 5, cy - 3));
+  }
+  // title bar drawn last so the list scrolls under it
+  draw_title_bar(ctx, C_PURPLE, s_session.name);
+  draw_rail(ctx, true);  // center ▶ = start
+}
+
 static void canvas_update(Layer *layer, GContext *ctx) {
   graphics_context_set_fill_color(ctx, C_BG);
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
 
-  if (s_phase == PHASE_DONE) render_done(ctx);
+  if (s_phase == PHASE_READY) render_overview(ctx);
+  else if (s_phase == PHASE_DONE) render_done(ctx);
   else if (s_phase == PHASE_REST) render_rest(ctx);
   else render_active(ctx);
 }
@@ -386,22 +458,29 @@ static void tick(void *data) {
 // Buttons
 
 static void click_up(ClickRecognizerRef rec, void *ctx) {
-  // Previous exercise (or restart current if at the first).
-  start_item(s_item > 0 ? s_item - 1 : 0);
+  if (s_phase == PHASE_READY) {           // scroll the plan up
+    if (s_overview_top > 0) s_overview_top--;
+  } else {                                // previous exercise (or restart first)
+    start_item(s_item > 0 ? s_item - 1 : 0);
+  }
   layer_mark_dirty(s_canvas);
 }
 
 static void click_select(ClickRecognizerRef rec, void *ctx) {
-  if (s_phase == PHASE_DONE) return;
-  s_paused = !s_paused;
+  if (s_phase == PHASE_READY) {           // ▶ start the workout
+    begin_workout();
+  } else if (s_phase != PHASE_DONE) {     // pause/resume
+    s_paused = !s_paused;
+  }
   layer_mark_dirty(s_canvas);
 }
 
 static void click_down(ClickRecognizerRef rec, void *ctx) {
-  // Skip to next exercise (or end the rest).
-  if (s_phase == PHASE_REST) {
+  if (s_phase == PHASE_READY) {           // scroll the plan down
+    if (s_overview_top + overview_visible() < s_session.item_count) s_overview_top++;
+  } else if (s_phase == PHASE_REST) {     // end the rest
     advance_phase();
-  } else if (s_item + 1 < s_session.item_count) {
+  } else if (s_item + 1 < s_session.item_count) {  // skip to next exercise
     start_item(s_item + 1);
   } else {
     enter_phase(PHASE_DONE);
@@ -449,8 +528,11 @@ void runner_push(void) {
   });
   window_stack_push(s_window, true);
 
-  start_item(0);
-  s_timer = app_timer_register(TICK_MS, tick, NULL);
+  // Start on the plan-review screen; the workout begins when the user presses
+  // Select. No timer runs until then.
+  s_phase = PHASE_READY;
+  s_overview_top = 0;
+  s_timer = NULL;
 }
 
 void runner_deinit(void) {
