@@ -44,6 +44,9 @@ returns it to the JS, which persists it to `localStorage` and pushes it to the w
   breath state machine (lead-in → inhale → exhale → rest → done), expanding ring +
   scaling breath disc, 1-vs-2 buzz `VibePattern`s gated by settings, button nav
   (prev / pause-resume / skip / back), cycles bar, rest countdown with NEXT UP.
+- **Plan-review screen**: on launch the watch shows the session (name, move count,
+  ~duration, scrollable list); the workout starts only when the user presses Select
+  (▶). Up/Down scroll the list, Back exits. No timer runs until the user begins.
 
 - **Fonts:** ✅ Fredoka (Medium, OFL) bundled subsetted at 38px (count/timer) and
   18px (phase label, cycles, next-up name); small UI labels use system Gothic.
