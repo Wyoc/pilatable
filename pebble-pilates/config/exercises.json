@@ -1,0 +1,1313 @@
+[
+  {
+    "id": "pelvic-curl",
+    "name": "Pelvic Curl",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Draw the navel down and curl the tailbone up, peeling the spine off the mat one vertebra at a time."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Hold the bridge, lengthening the front of the hips and keeping the ribs soft."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Melt the spine back down from the chest to the tailbone, returning to a neutral pelvis."
+      }
+    ],
+    "topCues": [
+      "Initiate from the deep abdominals and pelvic floor, not by pushing through the feet.",
+      "Keep the weight even across both feet with the knees parallel.",
+      "Articulate slowly — feel each vertebra meet and leave the mat."
+    ]
+  },
+  {
+    "id": "chest-lift",
+    "name": "Chest Lift",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "10",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Nod the chin gently and curl the head and shoulders up, sliding the ribs toward the pelvis."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Stay lifted and widen the back of the ribs, keeping the abdominals scooped."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Deepen the curl slightly, then lower the spine sequentially back to the mat."
+      }
+    ],
+    "topCues": [
+      "Lead with the breastbone, not the chin — keep space under the jaw.",
+      "Anchor the pelvis in neutral and let the abdominals, not the hip flexors, do the work.",
+      "Keep the elbows wide and the neck long and relaxed."
+    ]
+  },
+  {
+    "id": "leg-lift-supine",
+    "name": "Leg Lift Supine",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Stabilize the pelvis and float one leg up to tabletop without rocking the hips."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lower the leg back to the mat with control, keeping the low back quiet."
+      }
+    ],
+    "topCues": [
+      "Keep both hip bones level — the pelvis should not tip toward the moving leg.",
+      "Move from the hip joint while the torso stays completely still.",
+      "Hold a steady connection through the deep abdominals throughout."
+    ]
+  },
+  {
+    "id": "leg-lift-side",
+    "name": "Leg Lift Side",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "10 each side",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Lift the top leg toward the ceiling, keeping the pelvis stacked and still."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lower the leg slowly back down with the same control."
+      }
+    ],
+    "topCues": [
+      "Keep the waist long — don't let the underside collapse into the mat.",
+      "Lead with the inner thigh and keep the toes facing forward.",
+      "Stabilize through the supporting arm and the deep core."
+    ]
+  },
+  {
+    "id": "leg-pull-side",
+    "name": "Leg Pull Side",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "10 each side",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Sweep the top leg forward, keeping the torso steady and the spine long."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Carry the leg back behind the line of the body, opening the front of the hip."
+      }
+    ],
+    "topCues": [
+      "Move only as far as you can without letting the pelvis rock.",
+      "Keep the abdominals lifted so the low back stays stable.",
+      "Glide the leg at hip height — control over range."
+    ]
+  },
+  {
+    "id": "spine-twist-supine",
+    "name": "Spine Twist Supine",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5 each side",
+    "breathCount": 5,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Rotate the knees toward one side while keeping the opposite shoulder grounded."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Use the waist to draw the knees back through center."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate to the other side, moving from the obliques, not momentum."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return to center with length through the spine."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Control the final return and reset the pelvis to neutral."
+      }
+    ],
+    "topCues": [
+      "Keep both shoulder blades anchored to the mat the whole time.",
+      "Turn from the waist, not by swinging the legs.",
+      "Keep the knees and ankles together to challenge the obliques."
+    ]
+  },
+  {
+    "id": "chest-lift-with-rotation",
+    "name": "Chest Lift With Rotation",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5 each side",
+    "breathCount": 6,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Curl the head and chest up, drawing the ribs toward the pelvis."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Stay lifted and prepare to rotate, widening across the back."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate the upper torso toward one knee, reaching the opposite shoulder across."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return through center, keeping the curl high."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate to the other side from the waist."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return to center and lower with control."
+      }
+    ],
+    "topCues": [
+      "Rotate the whole rib cage, not just the elbow.",
+      "Keep the pelvis still and square as you turn.",
+      "Maintain the height of the chest curl throughout the rotations."
+    ]
+  },
+  {
+    "id": "back-extension-prone",
+    "name": "Back Extension Prone",
+    "alt": "",
+    "chapter": "Foundation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Draw the abdominals up off the mat and lengthen the chest forward and up into a low extension."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lower the breastbone back to the mat with control, restoring length."
+      }
+    ],
+    "topCues": [
+      "Keep the gaze down and the back of the neck long.",
+      "Lift from the upper back, not by crunching the lower back.",
+      "Keep the legs active and the pubic bone connected to the mat."
+    ]
+  },
+  {
+    "id": "one-leg-circle",
+    "name": "One-Leg Circle",
+    "alt": "Leg Circle",
+    "chapter": "Abdominal Work",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Cross the lifted leg across the body to begin the circle."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Sweep the leg around and up to complete the circle back to the start."
+      }
+    ],
+    "topCues": [
+      "Keep the pelvis absolutely still — only the leg moves.",
+      "Draw the circle from the hip joint, controlled and even.",
+      "Anchor the opposite leg and both shoulders into the mat."
+    ]
+  },
+  {
+    "id": "roll-up",
+    "name": "Roll-Up",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Lying long, reach the arms overhead and begin to lift the head and arms."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Peel the spine off the mat one bone at a time, reaching forward over the legs."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Begin to roll back, scooping the abdominals to initiate."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Restack each vertebra downward until the whole back rests on the mat."
+      }
+    ],
+    "topCues": [
+      "Move sequentially — no flat-back hinging or yanking up.",
+      "Keep the heels down and the shoulders away from the ears.",
+      "Use the breath to deepen the abdominal scoop on each curl."
+    ]
+  },
+  {
+    "id": "neck-pull",
+    "name": "Neck Pull",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Hands behind the head, lengthen the spine and begin to curl the head up."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll up and forward over the legs, keeping the elbows wide."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Restack the spine to sit tall, hinging back slightly."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower through the spine to the floor, one vertebra at a time."
+      }
+    ],
+    "topCues": [
+      "Keep the elbows in your peripheral vision — don't pull on the neck.",
+      "Press the legs down and together for stability.",
+      "Articulate slowly; the hands rest, they do not pull."
+    ]
+  },
+  {
+    "id": "hundred",
+    "name": "Hundred",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "10 breath cycles",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Curl the head and chest up, extend the legs, and begin pumping the arms."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Pump the arms briskly for five beats as you breathe in."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Pump for five beats as you breathe out, keeping the torso lifted and still."
+      }
+    ],
+    "topCues": [
+      "Keep the lower back imprinted; raise the legs higher if it strains.",
+      "Pump from the shoulders with straight arms, palms down.",
+      "Hold the chest high with the gaze toward the navel for the full set."
+    ]
+  },
+  {
+    "id": "one-leg-stretch",
+    "name": "One-Leg Stretch",
+    "alt": "Single-Leg Stretch",
+    "chapter": "Abdominal Work",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Curl up, hug one knee to the chest, and extend the other leg long."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Switch legs, drawing the opposite knee in as you breathe out."
+      }
+    ],
+    "topCues": [
+      "Hold the chest high and the back steady as the legs switch.",
+      "Extend the long leg only as low as the back can stay anchored.",
+      "Keep the movement smooth and the shoulders relaxed."
+    ]
+  },
+  {
+    "id": "single-straight-leg-stretch",
+    "name": "Single Straight-Leg Stretch",
+    "alt": "Hamstring Pull",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each leg",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Curl up and reach one straight leg toward you, gently pulsing it twice."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Switch the legs through center in the air."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Draw the other straight leg in with a light double pulse."
+      }
+    ],
+    "topCues": [
+      "Keep both legs straight and switch from the hips.",
+      "Hold the ankle or calf, never behind the knee.",
+      "Maintain a steady chest curl and quiet pelvis."
+    ]
+  },
+  {
+    "id": "double-leg-stretch",
+    "name": "Double-Leg Stretch",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "10",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Curl up holding the knees, then reach the arms and legs long in opposite directions."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Circle the arms around and draw the knees back in to the start."
+      }
+    ],
+    "topCues": [
+      "Extend only as far as you can keep the low back anchored.",
+      "Keep the head and chest lifted as the limbs reach away.",
+      "Move with control — the abdominals power the return."
+    ]
+  },
+  {
+    "id": "crisscross",
+    "name": "Crisscross",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each side",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Curl up, hands behind the head, and rotate to bring one shoulder toward the opposite knee."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Pass through center, switching the legs."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate to the other side, reaching the shoulder past the opposite knee."
+      }
+    ],
+    "topCues": [
+      "Rotate the rib cage toward the bent knee, not just the elbow.",
+      "Keep the extended leg low and steady, pelvis still.",
+      "Keep the elbows wide and the neck long."
+    ]
+  },
+  {
+    "id": "teaser",
+    "name": "Teaser",
+    "alt": "",
+    "chapter": "Abdominal Work",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "3",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Float the legs to a low diagonal and begin to peel the torso up off the mat."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll up to balance in a V-shape, then articulate the spine back down with control."
+      }
+    ],
+    "topCues": [
+      "Initiate the roll-up from the abdominals, not by throwing the arms.",
+      "Keep the legs steady at a fixed angle as the torso moves.",
+      "Lengthen the spine into a long curve — avoid collapsing the chest."
+    ]
+  },
+  {
+    "id": "spine-stretch",
+    "name": "Spine Stretch",
+    "alt": "Spine Stretch Forward",
+    "chapter": "Fine Articulation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Sitting tall, nod the head and curl forward over the legs, drawing the navel back."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Restack the spine to sit tall, returning to the start."
+      }
+    ],
+    "topCues": [
+      "Grow taller before you fold — create length, not a slump.",
+      "Keep the legs active and the heels reaching away.",
+      "Sit on top of the sit bones, not behind them."
+    ]
+  },
+  {
+    "id": "rolling-back",
+    "name": "Rolling Back",
+    "alt": "Rolling Like a Ball",
+    "chapter": "Fine Articulation",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "10",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Balance in a small ball shape and roll back to the shoulder blades."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll back up to the balance point without letting the feet touch."
+      }
+    ],
+    "topCues": [
+      "Keep the shape tight and consistent — don't change the ball mid-roll.",
+      "Initiate the roll with the abdominals, not a head throw.",
+      "Roll along the spine smoothly, never onto the neck."
+    ]
+  },
+  {
+    "id": "seal",
+    "name": "Seal",
+    "alt": "Seal Puppy",
+    "chapter": "Fine Articulation",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Balance holding the ankles, then roll back to the shoulders."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll back up to balance, keeping the feet lifted."
+      }
+    ],
+    "topCues": [
+      "Maintain the rounded shape throughout the roll.",
+      "Initiate from the deep abdominals, not momentum.",
+      "Keep the heels together and the elbows inside the knees."
+    ]
+  },
+  {
+    "id": "crab",
+    "name": "Crab",
+    "alt": "",
+    "chapter": "Fine Articulation",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "From a tight tucked shape, roll back onto the upper back."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll forward to balance, lengthening the spine, then re-tuck."
+      }
+    ],
+    "topCues": [
+      "Keep the shape compact and controlled on the way back.",
+      "Protect the neck — roll only to the shoulder blades.",
+      "Use steady abdominal control rather than speed."
+    ]
+  },
+  {
+    "id": "rocker-with-open-legs",
+    "name": "Rocker With Open Legs",
+    "alt": "Open-Leg Rocker",
+    "chapter": "Fine Articulation",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Balance holding the ankles with the legs open in a V, then roll back to the shoulders."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll back up to the balance point and hold steady."
+      }
+    ],
+    "topCues": [
+      "Keep the arms and legs straight and the chest open.",
+      "Find the balance before rolling — control over momentum.",
+      "Keep the same V-shape throughout the roll."
+    ]
+  },
+  {
+    "id": "rollover-with-legs-spread",
+    "name": "Rollover With Legs Spread",
+    "alt": "Rollover",
+    "chapter": "Fine Articulation",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "6",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Lift the legs overhead, beginning to take the hips off the mat."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll the legs over until they are parallel to the floor behind you, then open them."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Begin to roll the spine back down with the legs spread."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Articulate the spine to the mat and lower the legs to the start."
+      }
+    ],
+    "topCues": [
+      "Lift the hips with the abdominals, not by flinging the legs.",
+      "Keep the weight off the neck — stay on the shoulders.",
+      "Roll down one vertebra at a time with control."
+    ]
+  },
+  {
+    "id": "boomerang",
+    "name": "Boomerang",
+    "alt": "",
+    "chapter": "Fine Articulation",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "4",
+    "breathCount": 5,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "From a seated V with ankles crossed, roll back and overhead."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Change the cross of the ankles overhead."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Roll back up to balance in the teaser V."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Circle the arms back and clasp the hands behind you."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Fold forward over the legs with control."
+      }
+    ],
+    "topCues": [
+      "Flow the transitions smoothly — it's one continuous motion.",
+      "Keep the legs at a steady height during the balance.",
+      "Control every phase from the center; avoid momentum."
+    ]
+  },
+  {
+    "id": "control-balance",
+    "name": "Control Balance",
+    "alt": "",
+    "chapter": "Fine Articulation",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "3 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "From overhead, split the legs and reach one toward the floor behind, holding the other up."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Switch the legs through center, keeping the hips lifted."
+      }
+    ],
+    "topCues": [
+      "Keep the weight on the shoulders, never the neck.",
+      "Keep the pelvis steady through the leg change.",
+      "Reach long through both legs in opposite directions."
+    ]
+  },
+  {
+    "id": "jackknife",
+    "name": "Jackknife",
+    "alt": "",
+    "chapter": "Fine Articulation",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Float the legs overhead, then lift them toward the ceiling, hips high."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower the spine and legs back down to the mat with control."
+      }
+    ],
+    "topCues": [
+      "Lift from the abdominals, not by pushing the arms down.",
+      "Keep the weight off the neck and on the shoulders.",
+      "Articulate the spine down slowly on the return."
+    ]
+  },
+  {
+    "id": "shoulder-bridge",
+    "name": "Shoulder Bridge",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Lift into a bridge and extend one leg toward the ceiling."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lower and return the extended leg; keep the pelvis lifted and level."
+      }
+    ],
+    "topCues": [
+      "Keep the hips level — don't let the lifted side drop.",
+      "Press evenly through the supporting foot and shoulders.",
+      "Stabilize through the hamstrings and deep abdominals."
+    ]
+  },
+  {
+    "id": "scissors",
+    "name": "Scissors",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Support the hips, legs to the ceiling, and split them front and back."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Switch the legs through center with a light pulse at the ends."
+      }
+    ],
+    "topCues": [
+      "Keep the pelvis still and supported by the hands.",
+      "Reach long through both legs in opposite directions.",
+      "Stay lifted on the shoulders, off the neck."
+    ]
+  },
+  {
+    "id": "bicycle",
+    "name": "Bicycle",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5 each leg",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "On the shoulders, split the legs and bend the back knee toward you."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Pedal the legs through, drawing the opposite knee in."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Continue the cycling motion smoothly."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Reverse or repeat, keeping the pelvis high and stable."
+      }
+    ],
+    "topCues": [
+      "Keep the hips supported and lifted throughout.",
+      "Make the pedaling large but controlled.",
+      "Avoid weight on the neck — stay on the shoulders."
+    ]
+  },
+  {
+    "id": "leg-pull",
+    "name": "Leg Pull",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5 each leg",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "In a reverse plank, lift one leg toward the ceiling."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower the leg back down, keeping the hips lifted."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lift the other leg with the same control."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower it, maintaining a long, level line."
+      }
+    ],
+    "topCues": [
+      "Keep the hips high — don't let the seat sink.",
+      "Press through the shoulders and keep the chest open.",
+      "Move only the leg; the torso stays steady."
+    ]
+  },
+  {
+    "id": "leg-pull-front",
+    "name": "Leg Pull Front",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each leg",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "In a front plank, lift one leg, flexing the standing ankle forward."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower the leg and shift back over the heel."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lift the other leg, keeping the torso level."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower it, returning to a strong plank line."
+      }
+    ],
+    "topCues": [
+      "Keep the hips level and the shoulders over or near the wrists.",
+      "Lift the leg from the back of the hip without arching.",
+      "Maintain one long line from head to heels."
+    ]
+  },
+  {
+    "id": "push-up",
+    "name": "Push-Up",
+    "alt": "",
+    "chapter": "Bridging",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Roll down through the spine and walk the hands out to a plank."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Bend and straighten the elbows close to the body, then walk back and roll up."
+      }
+    ],
+    "topCues": [
+      "Keep the elbows hugging the ribs as you bend.",
+      "Hold a steady plank — no sagging or piking.",
+      "Articulate the spine on the way down and up."
+    ]
+  },
+  {
+    "id": "side-kick",
+    "name": "Side Kick",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "10 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Lying on the side, sweep the top leg forward in two controlled beats."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Sweep the leg back behind the body, lengthening the front of the hip."
+      }
+    ],
+    "topCues": [
+      "Hold the torso still and keep length under the bottom waist.",
+      "Move the leg at hip height with stable hips.",
+      "Stabilize through the deep abdominals, not momentum."
+    ]
+  },
+  {
+    "id": "side-kick-kneeling",
+    "name": "Side Kick Kneeling",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "10 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "From a kneeling side support, lift the top leg to hip height and sweep it forward."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Sweep the leg back, keeping the torso steady over the supporting arm."
+      }
+    ],
+    "topCues": [
+      "Keep a straight line from knee to head — don't sag.",
+      "Move the leg without rocking the pelvis.",
+      "Press firmly through the supporting hand."
+    ]
+  },
+  {
+    "id": "side-bend",
+    "name": "Side Bend",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "3 each side",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "From a side-sit, press up into a side plank, lifting the hips high."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower the hips back down with control to the start."
+      }
+    ],
+    "topCues": [
+      "Lift the hips toward the ceiling — make a long arc.",
+      "Stack the shoulder over the supporting hand.",
+      "Keep the body in one plane, not rolling forward or back."
+    ]
+  },
+  {
+    "id": "spine-twist",
+    "name": "Spine Twist",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each side",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Sitting tall, rotate the torso to one side in two pulses."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return to center, growing taller."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate to the other side with two controlled pulses."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return to center with length."
+      }
+    ],
+    "topCues": [
+      "Keep the hips square and grounded as you turn.",
+      "Rotate around a long, lifted spine.",
+      "Keep the arms in line with the shoulders."
+    ]
+  },
+  {
+    "id": "saw",
+    "name": "Saw",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "5 each side",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Sit tall and rotate the torso toward one leg, arms reaching wide."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Fold forward and reach the back hand past the opposite foot."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Roll up to sit tall and return through center."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rotate and fold to the other side with the same reach."
+      }
+    ],
+    "topCues": [
+      "Keep both sit bones grounded as you twist.",
+      "Twist first, then fold — lengthen before reaching.",
+      "Reach the opposite hand back to deepen the wring-out."
+    ]
+  },
+  {
+    "id": "twist",
+    "name": "Twist",
+    "alt": "",
+    "chapter": "Side Exercises",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "3 each side",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "From a side plank, lift the hips high."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Thread the top arm under the body, twisting the torso."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Unwind and reach the arm back up and over."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Lower back through the side plank to the start."
+      }
+    ],
+    "topCues": [
+      "Keep the hips lifted throughout the twist.",
+      "Rotate from the waist, following the moving arm with the eyes.",
+      "Press firmly through the supporting hand and keep the shoulder stable."
+    ]
+  },
+  {
+    "id": "corkscrew",
+    "name": "Corkscrew",
+    "alt": "Corkscrew Advanced",
+    "chapter": "Side Exercises",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "3 each side",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "With the legs together and lifted, sweep them to one side."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Circle the legs down and around through center."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Sweep up the other side, controlling the hips."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return the legs to the top, pelvis stable."
+      }
+    ],
+    "topCues": [
+      "Glue the legs together and move them as a single unit.",
+      "Anchor the upper back and shoulders to the mat.",
+      "Control the circle with the abdominals, not momentum."
+    ]
+  },
+  {
+    "id": "hip-twist-with-stretched-arms",
+    "name": "Hip Twist With Stretched Arms",
+    "alt": "Hip Circles Prep",
+    "chapter": "Side Exercises",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "5",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Balance in a V with the hands behind you, sweep the straight legs to one side and down."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Circle the legs around through the bottom."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Sweep up the other side, keeping the chest lifted."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return the legs to the top center."
+      }
+    ],
+    "topCues": [
+      "Keep the chest open and the torso still as the legs circle.",
+      "Press the hands down for a stable base.",
+      "Make the circles even and controlled in both directions."
+    ]
+  },
+  {
+    "id": "cat-stretch",
+    "name": "Cat Stretch",
+    "alt": "",
+    "chapter": "Back Extensions",
+    "level": "Fundamental",
+    "levelCode": "F",
+    "reps": "5",
+    "breathCount": 4,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "On all fours, round the spine, drawing the navel up toward the ceiling."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Return through a long, neutral spine."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Continue articulating, pressing the floor away."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Lengthen the spine forward to neutral."
+      }
+    ],
+    "topCues": [
+      "Move the spine one segment at a time, like a wave.",
+      "Keep the shoulders away from the ears and the elbows soft.",
+      "Coordinate the breath with the spinal motion."
+    ]
+  },
+  {
+    "id": "one-leg-kick",
+    "name": "One-Leg Kick",
+    "alt": "Single-Leg Kick",
+    "chapter": "Back Extensions",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "10 each leg",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Propped on the forearms, lengthen the spine and lift the chest."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Pulse one heel toward the seat twice, then switch legs."
+      }
+    ],
+    "topCues": [
+      "Hold the chest high while keeping the pubic bone grounded.",
+      "Keep the thighs and knees together.",
+      "Lengthen the lower back rather than compressing it."
+    ]
+  },
+  {
+    "id": "double-kick",
+    "name": "Double Kick",
+    "alt": "Double-Leg Kick",
+    "chapter": "Back Extensions",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "6",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Exhale",
+        "action": "Head turned to one side, hands clasped on the back, kick both heels to the seat three times."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Extend the legs and lift the chest, reaching the clasped hands toward the feet."
+      }
+    ],
+    "topCues": [
+      "Keep the kicks controlled with the knees together.",
+      "Open the chest on the extension without straining the neck.",
+      "Anchor the hips down into the mat as the chest rises."
+    ]
+  },
+  {
+    "id": "swimming",
+    "name": "Swimming",
+    "alt": "",
+    "chapter": "Back Extensions",
+    "level": "Intermediate",
+    "levelCode": "I",
+    "reps": "10 breath cycles",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Lying prone, lift the arms, legs, and chest, then flutter opposite arm and leg as you breathe in for a count."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Keep the flutter going steadily as you breathe out over the next count."
+      }
+    ],
+    "topCues": [
+      "Keep the limbs long and the belly lifted off the mat.",
+      "Move briskly but keep the torso stable.",
+      "Reach in opposite directions rather than just lifting higher."
+    ],
+    "continuous": true
+  },
+  {
+    "id": "rocking",
+    "name": "Rocking",
+    "alt": "",
+    "chapter": "Back Extensions",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "6",
+    "breathCount": 2,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "Hold the ankles, lift the chest and thighs, and rock forward onto the chest."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rock back onto the thighs, keeping the legs pressing into the hands."
+      }
+    ],
+    "topCues": [
+      "Drive the rocking by pressing the shins into the hands.",
+      "Keep the chest open and the gaze forward.",
+      "Maintain the bow shape throughout the rock."
+    ]
+  },
+  {
+    "id": "swan-dive",
+    "name": "Swan Dive",
+    "alt": "",
+    "chapter": "Back Extensions",
+    "level": "Advanced",
+    "levelCode": "A",
+    "reps": "6",
+    "breathCount": 3,
+    "breathShort": [
+      {
+        "phase": "Inhale",
+        "action": "From a low back extension, reach the chest forward and up into the swan."
+      },
+      {
+        "phase": "Exhale",
+        "action": "Rock forward as the legs lift, reaching the arms long."
+      },
+      {
+        "phase": "Inhale",
+        "action": "Rock back up to the extension, lengthening the spine."
+      }
+    ],
+    "topCues": [
+      "Keep the legs active and lifted as the chest rises.",
+      "Initiate the dive from the upper back, not the low back.",
+      "Keep the motion rhythmic and controlled."
+    ]
+  }
+]
