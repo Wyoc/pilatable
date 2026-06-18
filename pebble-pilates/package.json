@@ -1,0 +1,39 @@
+{
+  "name": "pilatable",
+  "author": "Pilatable",
+  "version": "0.1.0",
+  "keywords": ["pebble-app", "pilates", "fitness"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "Pilatable",
+    "uuid": "5c871189-d05d-4ab9-b83c-ebc5e22f0922",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "capabilities": ["configurable"],
+    "targetPlatforms": [
+      "emery"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": [
+      "REQUEST_SESSION",
+      "SYNC_DONE",
+      "SESSION_VERSION",
+      "SESSION_NAME",
+      "ITEM_COUNT",
+      "CHUNK_INDEX",
+      "ITEM_NAME",
+      "ITEM_REPS",
+      "ITEM_LENGTH_DS",
+      "ITEM_REST",
+      "SET_HAPTICS",
+      "SET_INTENSITY",
+      "SET_LEADIN"
+    ],
+    "resources": {
+      "media": []
+    }
+  }
+}
