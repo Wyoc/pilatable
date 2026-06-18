@@ -33,7 +33,20 @@
       "SET_LEADIN"
     ],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "font",
+          "name": "FONT_FREDOKA_38",
+          "file": "fonts/Fredoka-Medium.ttf",
+          "characterRegex": "[0-9:/ ]"
+        },
+        {
+          "type": "font",
+          "name": "FONT_FREDOKA_18",
+          "file": "fonts/Fredoka-Medium.ttf",
+          "characterRegex": "[A-Za-z0-9 .,'/-]"
+        }
+      ]
     }
   }
 }

@@ -43,6 +43,8 @@ static Settings s_settings;
 static Window *s_window;
 static Layer *s_canvas;
 static AppTimer *s_timer;
+static GFont s_font_xl;   // Fredoka 38 — big count / rest time
+static GFont s_font_md;   // Fredoka 18 — phase label, cycles, next-up name
 
 static uint8_t s_item;        // current exercise index
 static uint8_t s_rep;         // current cycle, 1-based
@@ -77,13 +79,17 @@ static uint32_t phase_duration_ms(void) {
 
 static void buzz(int pulses) {
   if (!s_settings.haptics_enabled) return;
-  uint32_t on = s_settings.intensity == INTENSITY_GENTLE ? 80
-              : s_settings.intensity == INTENSITY_STRONG ? 220 : 140;
+  // Tuned for a clear 1-vs-2 distinction; a tight gap makes the double read as
+  // two crisp taps rather than one long buzz. Final feel to be confirmed on the
+  // PT2 motor — these are good starting values per intensity.
+  uint32_t on  = s_settings.intensity == INTENSITY_GENTLE ? 70
+               : s_settings.intensity == INTENSITY_STRONG ? 200 : 120;
+  uint32_t gap = s_settings.intensity == INTENSITY_STRONG ? 110 : 90;
   uint32_t seg[5];
   int n = 0;
   for (int i = 0; i < pulses && n < 5; i++) {
     seg[n++] = on;
-    if (i < pulses - 1 && n < 5) seg[n++] = 120;  // gap between pulses
+    if (i < pulses - 1 && n < 5) seg[n++] = gap;
   }
   VibePattern p = { .durations = seg, .num_segments = n };
   vibes_enqueue_custom_pattern(p);
@@ -221,13 +227,13 @@ static void draw_ring(GContext *ctx, int arc_num, int arc_den) {
 static void draw_center_count(GContext *ctx, const char *label, const char *count) {
   if (label) {
     graphics_context_set_text_color(ctx, C_PURPLE);
-    graphics_draw_text(ctx, label, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD),
-                       GRect(RING_CX - 54, RING_CY - 28, 108, 16),
+    graphics_draw_text(ctx, label, s_font_md,
+                       GRect(RING_CX - 54, RING_CY - 32, 108, 20),
                        GTextOverflowModeFill, GTextAlignmentCenter, NULL);
   }
   graphics_context_set_text_color(ctx, C_INK);
-  graphics_draw_text(ctx, count, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD),
-                     GRect(RING_CX - 54, RING_CY - 14, 108, 48),
+  graphics_draw_text(ctx, count, s_font_xl,
+                     GRect(RING_CX - 54, RING_CY - 12, 108, 46),
                      GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 }
 
@@ -238,8 +244,8 @@ static void draw_cycles_bar(GContext *ctx) {
   char cyc[12];
   snprintf(cyc, sizeof(cyc), "%d / %d", s_rep, cur_reps());
   graphics_context_set_text_color(ctx, C_INK);
-  graphics_draw_text(ctx, cyc, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
-                     GRect(88, 153, 80, 20), GTextOverflowModeFill, GTextAlignmentRight, NULL);
+  graphics_draw_text(ctx, cyc, s_font_md,
+                     GRect(80, 150, 88, 22), GTextOverflowModeFill, GTextAlignmentRight, NULL);
 
   GRect track = GRect(8, 180, RAIL_X - 16, 6);
   graphics_context_set_fill_color(ctx, C_BAR_TRK);
@@ -315,7 +321,7 @@ static void render_rest(GContext *ctx) {
   const char *next = (s_item + 1 < s_session.item_count)
                    ? s_session.items[s_item + 1].name : "Done";
   graphics_context_set_text_color(ctx, C_INK);
-  graphics_draw_text(ctx, next, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
+  graphics_draw_text(ctx, next, s_font_md,
                      GRect(8, 172, RAIL_X - 16, 24), GTextOverflowModeTrailingEllipsis,
                      GTextAlignmentCenter, NULL);
   if (s_item + 1 < s_session.item_count) {
@@ -413,6 +419,8 @@ static void click_config(void *ctx) {
 // Window lifecycle
 
 static void window_load(Window *window) {
+  s_font_xl = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_FREDOKA_38));
+  s_font_md = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_FREDOKA_18));
   Layer *root = window_get_root_layer(window);
   s_canvas = layer_create(layer_get_bounds(root));
   layer_set_update_proc(s_canvas, canvas_update);
@@ -421,6 +429,8 @@ static void window_load(Window *window) {
 
 static void window_unload(Window *window) {
   layer_destroy(s_canvas);
+  fonts_unload_custom_font(s_font_xl);
+  fonts_unload_custom_font(s_font_md);
 }
 
 void runner_init(const Session *session, const Settings *settings) {
