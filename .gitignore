@@ -1,0 +1,15 @@
+# Pebble build output
+pebble-pilates/build/
+pebble-pilates/.lock-waf*
+*.pbw
+
+# Node
+node_modules/
+
+# Design handoff — kept OUT of the public repo: exercises.json contains
+# copyrighted Pilates Anatomy text (see PLAN.md / ship risks). Local only.
+extracted/
+*.zip
+
+# OS
+.DS_Store
