@@ -32,10 +32,10 @@ function defaultSession() {
       { id: 'roll-up', name: 'Roll-Up', reps: 5, movementLengthSec: 4.0, restAfterSec: 20, breathPattern: IEIE },
       { id: 'one-leg-stretch', name: 'One-Leg Stretch', reps: 8, movementLengthSec: 3.0, restAfterSec: 20, breathPattern: IE },
       { id: 'crisscross', name: 'Crisscross', reps: 6, movementLengthSec: 3.0, restAfterSec: 20, breathPattern: EI },
-      { id: 'spine-twist', name: 'Spine Twist', reps: 5, movementLengthSec: 3.5, restAfterSec: 20, breathPattern: EI },
+      { id: 'spine-twist', name: 'Spine Twist', reps: 5, movementLengthSec: 4, restAfterSec: 20, breathPattern: EI },
       { id: 'swimming', name: 'Swimming', reps: 10, movementLengthSec: 3.0, restAfterSec: 25, breathPattern: IE, mode: 'continuous' },
       { id: 'spine-stretch', name: 'Spine Stretch', reps: 4, movementLengthSec: 5.0, restAfterSec: 20, breathPattern: EI },
-      { id: 'rolling-back', name: 'Rolling Back', reps: 6, movementLengthSec: 3.5, restAfterSec: 0, breathPattern: IE }
+      { id: 'rolling-back', name: 'Rolling Back', reps: 6, movementLengthSec: 4, restAfterSec: 0, breathPattern: IE }
     ]
   };
 }

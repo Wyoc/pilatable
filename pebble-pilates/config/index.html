@@ -175,7 +175,7 @@ function itemIndex(id){ return cur().items.findIndex(function(it){return it.id==
 function mapItems(arr){ return (arr||[]).map(function(it){ return {
   id: it.id || null, name: it.name,
   reps: it.reps||5,
-  movementLengthSec: it.movementLengthSec || 4,
+  movementLengthSec: Math.max(2, Math.min(8, Math.round(it.movementLengthSec || 4))),
   restAfterSec: (it.restAfterSec==null?30:it.restAfterSec),
   breathPattern: it.breathPattern || null,
   mode: it.mode || null }; }); }
@@ -350,7 +350,7 @@ function renderConfigure(){
     // movement length
     '<div class="card"><div class="stepperrow"><div class="lab">Movement length</div>'+
       '<div class="val fred" id="lenVal" style="color:var(--purple);font-size:17px"></div></div>'+
-      '<input type="range" id="len" min="2" max="8" step="0.5">'+
+      '<input type="range" id="len" min="2" max="8" step="1">'+
       '<div class="ends"><span>slow &amp; deep</span><span>brisk</span></div>'+
       '<div class="sub">Sets each inhale &amp; exhale on the watch.</div></div>'+
     // rest
@@ -367,7 +367,7 @@ function renderConfigure(){
   function refresh(){
     $('#repsVal').textContent = item.reps;
     $('#repsSub').textContent = e.reps; // factual reps note
-    $('#lenVal').textContent = item.movementLengthSec.toFixed(1)+'s';
+    $('#lenVal').textContent = Math.round(item.movementLengthSec)+'s';
     $('#len').value = item.movementLengthSec;
     $('#restVal').textContent = item.restAfterSec+'s';
   }
@@ -378,7 +378,7 @@ function renderConfigure(){
     if(field==='rest') item.restAfterSec=Math.min(120,Math.max(0,item.restAfterSec+delta));
     refresh();
   };});
-  $('#len').addEventListener('input', function(ev){ item.movementLengthSec=parseFloat(ev.target.value); refresh(); });
+  $('#len').addEventListener('input', function(ev){ item.movementLengthSec=parseInt(ev.target.value,10); refresh(); });
   $('.backrow').onclick=function(){ open('library'); };
 
   setCTA({ full:true, label:(idx>=0?'Update move':'Add to session'), action:function(){
@@ -420,7 +420,7 @@ function renderReady(){
       ? '<div class="restdiv">REST '+fmt(it.restAfterSec)+'</div>' : '';
     return '<div class="oitem"><div class="num">'+(i+1)+'</div>'+
       '<div class="grow"><div class="nm" data-edit="'+it.id+'">'+esc(it.name)+'</div>'+
-      '<div class="rp">'+it.reps+' reps · '+it.movementLengthSec.toFixed(1)+'s</div></div>'+
+      '<div class="rp">'+it.reps+' reps · '+Math.round(it.movementLengthSec)+'s</div></div>'+
       '<button class="addbtn on" data-rm="'+it.id+'">✓</button></div>'+rest;
   }).join('');
 
