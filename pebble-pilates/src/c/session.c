@@ -40,10 +40,10 @@ static const SessionItem DEFAULT_ITEMS[] = {
   { "Roll-Up",            5,  40, 20, 10, MODE_NORMAL,     "IEIE", 4 },
   { "One-Leg Stretch",    8,  30, 20, 10, MODE_NORMAL,     "IE",   2 },
   { "Crisscross",         6,  30, 20, 10, MODE_NORMAL,     "EI",   2 },
-  { "Spine Twist",        5,  35, 20, 10, MODE_NORMAL,     "EI",   2 },
+  { "Spine Twist",        5,  40, 20, 10, MODE_NORMAL,     "EI",   2 },
   { "Swimming",          10,  30, 25, 10, MODE_CONTINUOUS, "IE",   2 },
   { "Spine Stretch",      4,  50, 20, 10, MODE_NORMAL,     "EI",   2 },
-  { "Rolling Back",       6,  35,  0, 10, MODE_NORMAL,     "IE",   2 },
+  { "Rolling Back",       6,  40,  0, 10, MODE_NORMAL,     "IE",   2 },
 };
 #define DEFAULT_ITEM_COUNT (sizeof(DEFAULT_ITEMS) / sizeof(DEFAULT_ITEMS[0]))
 
