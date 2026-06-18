@@ -28,12 +28,18 @@
 
 #define TICK_MS 200                // ~5 Hz: "redraw a few times per second"
 #define LEAD_IN_MS 3000
+// Inter-rep pause adapts to the breath at the rep boundary: longer when the rep
+// ends and the next begins on the SAME phase (e.g. EIE → exhale into exhale),
+// shorter when it flows naturally (e.g. IE → exhale into inhale).
+#define FLOW_PAUSE_MS 1000         // natural boundary
+#define RESET_PAUSE_MS 3000        // repeated-phase boundary — time to catch breath
 
 typedef enum {
   PHASE_READY,    // pre-start plan review; waits for the user to begin
   PHASE_LEAD_IN,
   PHASE_INHALE,
   PHASE_EXHALE,
+  PHASE_PAUSE,    // short settle between reps
   PHASE_REST,
   PHASE_DONE,
 } Phase;
@@ -49,6 +55,7 @@ static GFont s_font_md;   // Fredoka 18 — phase label, cycles, next-up name
 
 static uint8_t s_item;        // current exercise index
 static uint8_t s_rep;         // current cycle, 1-based
+static uint8_t s_phase_idx;   // index into the current item's breath pattern
 static Phase s_phase;
 static uint32_t s_elapsed_ms; // within the current phase
 static int s_last_second;     // for per-second lead-in pulses
@@ -89,6 +96,12 @@ static uint32_t phase_duration_ms(void) {
     case PHASE_EXHALE: {
       uint32_t ms = (uint32_t)cur_item()->movement_length_ds * 100;
       return ms < 1000 ? 4000 : ms;  // sane fallback if unset
+    }
+    case PHASE_PAUSE: {
+      const SessionItem *it = cur_item();
+      bool repeats = it->pattern_len > 0 &&
+                     it->pattern[it->pattern_len - 1] == it->pattern[0];
+      return repeats ? RESET_PAUSE_MS : FLOW_PAUSE_MS;
     }
     case PHASE_REST: return (uint32_t)cur_item()->rest_after_sec * 1000;
     case PHASE_DONE: return 0;
@@ -138,33 +151,59 @@ static void enter_phase(Phase p) {
   }
 }
 
+// Enter the breath phase named by the current pattern slot (s_phase_idx).
+static void enter_breath_phase(void) {
+  const char *pat = cur_item()->pattern;
+  char c = (s_phase_idx < cur_item()->pattern_len) ? pat[s_phase_idx] : 'I';
+  enter_phase(c == 'I' ? PHASE_INHALE : PHASE_EXHALE);
+}
+
 static void start_item(uint8_t index) {
   s_item = index;
   s_rep = 1;
-  enter_phase(s_settings.lead_in_enabled ? PHASE_LEAD_IN : PHASE_INHALE);
+  s_phase_idx = 0;
+  if (s_settings.lead_in_enabled) enter_phase(PHASE_LEAD_IN);
+  else enter_breath_phase();
+}
+
+// Bespoke modes (Hundred/Continuous) run without an inter-rep pause.
+static bool uses_pause(void) {
+  return cur_item()->mode == MODE_NORMAL;
+}
+
+// End of an exercise's reps: go to rest, next item, or done.
+static void finish_exercise(void) {
+  if (s_item + 1 < s_session.item_count) {
+    if (cur_item()->rest_after_sec > 0) enter_phase(PHASE_REST);
+    else start_item(s_item + 1);
+  } else {
+    enter_phase(PHASE_DONE);
+  }
 }
 
 static void advance_phase(void) {
   switch (s_phase) {
     case PHASE_LEAD_IN:
-      enter_phase(PHASE_INHALE);
+      enter_breath_phase();
       break;
     case PHASE_INHALE:
-      enter_phase(PHASE_EXHALE);
-      break;
     case PHASE_EXHALE:
-      if (s_rep < cur_reps()) {
-        s_rep++;
-        enter_phase(PHASE_INHALE);
-      } else if (s_item + 1 < s_session.item_count) {
-        if (cur_item()->rest_after_sec > 0) {
-          enter_phase(PHASE_REST);
-        } else {
-          start_item(s_item + 1);
-        }
+      s_phase_idx++;
+      if (s_phase_idx < cur_item()->pattern_len) {
+        enter_breath_phase();                 // next breath in this rep
       } else {
-        enter_phase(PHASE_DONE);
+        s_phase_idx = 0;                       // rep complete
+        if (s_rep < cur_reps()) {
+          if (uses_pause()) enter_phase(PHASE_PAUSE);
+          else { s_rep++; enter_breath_phase(); }
+        } else {
+          finish_exercise();
+        }
       }
+      break;
+    case PHASE_PAUSE:
+      s_rep++;
+      enter_breath_phase();
       break;
     case PHASE_REST:
       start_item(s_item + 1);
@@ -308,17 +347,30 @@ static void render_active(GContext *ctx) {
   graphics_fill_circle(ctx, GPoint(RING_CX, RING_CY), radius);
 
   // Center label + count.
-  const char *label = s_phase == PHASE_INHALE ? "INHALE"
-                    : s_phase == PHASE_EXHALE ? "EXHALE" : "READY";
-  char count[6];
+  const char *label;
+  char count[8];
   if (s_phase == PHASE_LEAD_IN) {
+    label = "READY";
     int remaining = 3 - (int)(s_elapsed_ms / 1000);
     if (remaining < 1) remaining = 1;
     snprintf(count, sizeof(count), "%d", remaining);
+  } else if (s_phase == PHASE_PAUSE) {
+    label = "RESET";
+    int remaining = (p_den - p_num + 999) / 1000;  // ceil seconds
+    if (remaining < 1) remaining = 1;
+    snprintf(count, sizeof(count), "%d", remaining);
   } else {
-    int n = (int)(s_elapsed_ms / 1000) + 1;
-    if (n > total_secs) n = total_secs;
-    snprintf(count, sizeof(count), "%d", n);
+    label = (s_phase == PHASE_INHALE) ? "INHALE" : "EXHALE";
+    if (cur_item()->mode == MODE_HUNDRED) {
+      int beat = (p_den > 0) ? (int)(s_elapsed_ms * 5 / p_den) + 1 : 1;  // 1..5 pump beats
+      if (beat > 5) beat = 5;
+      snprintf(count, sizeof(count), "%d", beat);
+    } else {
+      int n = (int)(s_elapsed_ms / 1000) + 1;
+      if (n > total_secs) n = total_secs;
+      if (n < 1) n = 1;
+      snprintf(count, sizeof(count), "%d", n);
+    }
   }
   draw_center_count(ctx, label, count);
 

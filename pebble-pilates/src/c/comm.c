@@ -65,6 +65,19 @@ static void prv_inbox_received(DictionaryIterator *iter, void *context) {
       if (len) item->movement_length_ds = len->value->uint16;
       Tuple *rest = dict_find(iter, MESSAGE_KEY_ITEM_REST);
       if (rest) item->rest_after_sec = rest->value->uint16;
+      Tuple *btw = dict_find(iter, MESSAGE_KEY_ITEM_BETWEEN_DS);
+      if (btw) item->between_reps_ds = btw->value->uint16;
+      Tuple *mode = dict_find(iter, MESSAGE_KEY_ITEM_MODE);
+      if (mode) item->mode = mode->value->uint8;
+      Tuple *pat = dict_find(iter, MESSAGE_KEY_ITEM_PATTERN);
+      if (pat) {
+        strncpy(item->pattern, pat->value->cstring, MAX_PATTERN_LEN - 1);
+        item->pattern_len = strlen(item->pattern);
+      }
+      if (item->pattern_len == 0) {  // back-compat default
+        strncpy(item->pattern, "IE", MAX_PATTERN_LEN - 1);
+        item->pattern_len = 2;
+      }
       s_received_items++;
     }
     return;

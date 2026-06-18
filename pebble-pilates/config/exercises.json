@@ -26,6 +26,11 @@
       "Initiate from the deep abdominals and pelvic floor, not by pushing through the feet.",
       "Keep the weight even across both feet with the knees parallel.",
       "Articulate slowly; feel each vertebra meet and leave the mat."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -55,6 +60,11 @@
       "Lead with the breastbone, not the chin; keep space under the jaw.",
       "Anchor the pelvis in neutral and let the abdominals, not the hip flexors, do the work.",
       "Keep the elbows wide and the neck long and relaxed."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -80,6 +90,10 @@
       "Keep both hip bones level; the pelvis should not tip toward the moving leg.",
       "Move from the hip joint while the torso stays completely still.",
       "Hold a steady connection through the deep abdominals throughout."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -105,6 +119,10 @@
       "Keep the waist long; don't let the underside collapse into the mat.",
       "Lead with the inner thigh and keep the toes facing forward.",
       "Stabilize through the supporting arm and the deep core."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -130,6 +148,10 @@
       "Move only as far as you can without letting the pelvis rock.",
       "Keep the abdominals lifted so the low back stays stable.",
       "Glide the leg at hip height: control over range."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -167,6 +189,10 @@
       "Keep both shoulder blades anchored to the mat the whole time.",
       "Turn from the waist, not by swinging the legs.",
       "Keep the knees and ankles together to challenge the obliques."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -208,6 +234,10 @@
       "Rotate the whole rib cage, not just the elbow.",
       "Keep the pelvis still and square as you turn.",
       "Maintain the height of the chest curl throughout the rotations."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -233,6 +263,10 @@
       "Keep the gaze down and the back of the neck long.",
       "Lift from the upper back, not by crunching the lower back.",
       "Keep the legs active and the pubic bone connected to the mat."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -258,6 +292,10 @@
       "Keep the pelvis absolutely still; only the leg moves.",
       "Draw the circle from the hip joint, controlled and even.",
       "Anchor the opposite leg and both shoulders into the mat."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -291,6 +329,12 @@
       "Move sequentially: no flat-back hinging or yanking up.",
       "Keep the heels down and the shoulders away from the ears.",
       "Use the breath to deepen the abdominal scoop on each curl."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -324,6 +368,12 @@
       "Keep the elbows in your peripheral vision; don't pull on the neck.",
       "Press the legs down and together for stability.",
       "Articulate slowly; the hands rest, they do not pull."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -353,6 +403,11 @@
       "Keep the lower back imprinted; raise the legs higher if it strains.",
       "Pump from the shoulders with straight arms, palms down.",
       "Hold the chest high with the gaze toward the navel for the full set."
+    ],
+    "mode": "hundred",
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -378,6 +433,10 @@
       "Hold the chest high and the back steady as the legs switch.",
       "Extend the long leg only as low as the back can stay anchored.",
       "Keep the movement smooth and the shoulders relaxed."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -407,6 +466,10 @@
       "Keep both legs straight and switch from the hips.",
       "Hold the ankle or calf, never behind the knee.",
       "Maintain a steady chest curl and quiet pelvis."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -432,6 +495,10 @@
       "Extend only as far as you can keep the low back anchored.",
       "Keep the head and chest lifted as the limbs reach away.",
       "Move with control; the abdominals power the return."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -461,6 +528,10 @@
       "Rotate the rib cage toward the bent knee, not just the elbow.",
       "Keep the extended leg low and steady, pelvis still.",
       "Keep the elbows wide and the neck long."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -486,6 +557,10 @@
       "Initiate the roll-up from the abdominals, not by throwing the arms.",
       "Keep the legs steady at a fixed angle as the torso moves.",
       "Lengthen the spine into a long curve; avoid collapsing the chest."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -511,6 +586,10 @@
       "Grow taller before you fold; create length, not a slump.",
       "Keep the legs active and the heels reaching away.",
       "Sit on top of the sit bones, not behind them."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -536,6 +615,10 @@
       "Keep the shape tight and consistent; don't change the ball mid-roll.",
       "Initiate the roll with the abdominals, not a head throw.",
       "Roll along the spine smoothly, never onto the neck."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -561,6 +644,10 @@
       "Maintain the rounded shape throughout the roll.",
       "Initiate from the deep abdominals, not momentum.",
       "Keep the heels together and the elbows inside the knees."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -586,6 +673,10 @@
       "Keep the shape compact and controlled on the way back.",
       "Protect the neck; roll only to the shoulder blades.",
       "Use steady abdominal control rather than speed."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -611,6 +702,10 @@
       "Keep the arms and legs straight and the chest open.",
       "Find the balance before rolling: control over momentum.",
       "Keep the same V-shape throughout the roll."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -644,6 +739,12 @@
       "Lift the hips with the abdominals, not by flinging the legs.",
       "Keep the weight off the neck; stay on the shoulders.",
       "Roll down one vertebra at a time with control."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -681,6 +782,13 @@
       "Flow the transitions smoothly; it's one continuous motion.",
       "Keep the legs at a steady height during the balance.",
       "Control every phase from the center; avoid momentum."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale",
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -706,6 +814,10 @@
       "Keep the weight on the shoulders, never the neck.",
       "Keep the pelvis steady through the leg change.",
       "Reach long through both legs in opposite directions."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -731,6 +843,10 @@
       "Lift from the abdominals, not by pushing the arms down.",
       "Keep the weight off the neck and on the shoulders.",
       "Articulate the spine down slowly on the return."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -756,6 +872,10 @@
       "Keep the hips level; don't let the lifted side drop.",
       "Press evenly through the supporting foot and shoulders.",
       "Stabilize through the hamstrings and deep abdominals."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -781,6 +901,10 @@
       "Keep the pelvis still and supported by the hands.",
       "Reach long through both legs in opposite directions.",
       "Stay lifted on the shoulders, off the neck."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -814,6 +938,10 @@
       "Keep the hips supported and lifted throughout.",
       "Make the pedaling large but controlled.",
       "Avoid weight on the neck; stay on the shoulders."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -847,6 +975,10 @@
       "Keep the hips high; don't let the seat sink.",
       "Press through the shoulders and keep the chest open.",
       "Move only the leg; the torso stays steady."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -880,6 +1012,10 @@
       "Keep the hips level and the shoulders over or near the wrists.",
       "Lift the leg from the back of the hip without arching.",
       "Maintain one long line from head to heels."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -905,6 +1041,10 @@
       "Keep the elbows hugging the ribs as you bend.",
       "Hold a steady plank: no sagging or piking.",
       "Articulate the spine on the way down and up."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -930,6 +1070,10 @@
       "Hold the torso still and keep length under the bottom waist.",
       "Move the leg at hip height with stable hips.",
       "Stabilize through the deep abdominals, not momentum."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -955,6 +1099,10 @@
       "Keep a straight line from knee to head; don't sag.",
       "Move the leg without rocking the pelvis.",
       "Press firmly through the supporting hand."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -980,6 +1128,10 @@
       "Lift the hips toward the ceiling: make a long arc.",
       "Stack the shoulder over the supporting hand.",
       "Keep the body in one plane, not rolling forward or back."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -1013,6 +1165,10 @@
       "Keep the hips square and grounded as you turn.",
       "Rotate around a long, lifted spine.",
       "Keep the arms in line with the shoulders."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -1046,6 +1202,10 @@
       "Keep both sit bones grounded as you twist.",
       "Twist first, then fold; lengthen before reaching.",
       "Reach the opposite hand back to deepen the wring-out."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -1079,6 +1239,12 @@
       "Keep the hips lifted throughout the twist.",
       "Rotate from the waist, following the moving arm with the eyes.",
       "Press firmly through the supporting hand and keep the shoulder stable."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale",
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -1112,6 +1278,10 @@
       "Glue the legs together and move them as a single unit.",
       "Anchor the upper back and shoulders to the mat.",
       "Control the circle with the abdominals, not momentum."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -1145,6 +1315,10 @@
       "Keep the chest open and the torso still as the legs circle.",
       "Press the hands down for a stable base.",
       "Make the circles even and controlled in both directions."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -1178,6 +1352,10 @@
       "Move the spine one segment at a time, like a wave.",
       "Keep the shoulders away from the ears and the elbows soft.",
       "Coordinate the breath with the spinal motion."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -1203,6 +1381,10 @@
       "Hold the chest high while keeping the pubic bone grounded.",
       "Keep the thighs and knees together.",
       "Lengthen the lower back rather than compressing it."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -1228,6 +1410,10 @@
       "Keep the kicks controlled with the knees together.",
       "Open the chest on the extension without straining the neck.",
       "Anchor the hips down into the mat as the chest rises."
+    ],
+    "breathPattern": [
+      "exhale",
+      "inhale"
     ]
   },
   {
@@ -1254,7 +1440,11 @@
       "Move briskly but keep the torso stable.",
       "Reach in opposite directions rather than just lifting higher."
     ],
-    "continuous": true
+    "mode": "continuous",
+    "breathPattern": [
+      "inhale",
+      "exhale"
+    ]
   },
   {
     "id": "rocking",
@@ -1279,6 +1469,10 @@
       "Drive the rocking by pressing the shins into the hands.",
       "Keep the chest open and the gaze forward.",
       "Maintain the bow shape throughout the rock."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale"
     ]
   },
   {
@@ -1308,6 +1502,11 @@
       "Keep the legs active and lifted as the chest rises.",
       "Initiate the dive from the upper back, not the low back.",
       "Keep the motion rhythmic and controlled."
+    ],
+    "breathPattern": [
+      "inhale",
+      "exhale",
+      "inhale"
     ]
   }
 ]

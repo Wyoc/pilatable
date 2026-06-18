@@ -28,6 +28,9 @@
       "ITEM_REPS",
       "ITEM_LENGTH_DS",
       "ITEM_REST",
+      "ITEM_BETWEEN_DS",
+      "ITEM_MODE",
+      "ITEM_PATTERN",
       "SET_HAPTICS",
       "SET_INTENSITY",
       "SET_LEADIN"

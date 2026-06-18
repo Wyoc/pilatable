@@ -168,7 +168,10 @@ function seed(){
           id: it.id || null, name: it.name,
           reps: it.reps||5,
           movementLengthSec: it.movementLengthSec || 4,
-          restAfterSec: (it.restAfterSec==null?30:it.restAfterSec) }; });
+          restAfterSec: (it.restAfterSec==null?30:it.restAfterSec),
+          betweenRepsSec: (it.betweenRepsSec==null?1:it.betweenRepsSec),
+          breathPattern: it.breathPattern || null,
+          mode: it.mode || null }; });
       }
     }
   }catch(e){ console.log('seed parse failed', e); }
@@ -177,6 +180,9 @@ function seed(){
 function reconcile(){
   session.items.forEach(function(it){
     if(!it.id){ var m = EXERCISES.find(function(e){return e.name===it.name;}); if(m) it.id=m.id; }
+    var e = exById(it.id);
+    if(e){ it.breathPattern = e.breathPattern; it.mode = e.mode || null; }  // always refresh from source
+    if(it.betweenRepsSec == null) it.betweenRepsSec = 1;
   });
   session.items = session.items.filter(function(it){return it.id;});
 }
@@ -245,7 +251,8 @@ function renderLibrary(){
 function renderConfigure(){
   var e = exById(view.id); if(!e){ open('library'); return; }
   var idx = itemIndex(e.id);
-  var item = idx>=0 ? session.items[idx] : { id:e.id, name:e.name, reps:repsToInt(e.reps), movementLengthSec:4, restAfterSec:30 };
+  var item = idx>=0 ? session.items[idx] : { id:e.id, name:e.name, reps:repsToInt(e.reps),
+    movementLengthSec:4, restAfterSec:30, betweenRepsSec:1, breathPattern:e.breathPattern, mode:e.mode||null };
 
   var breath = (e.breathShort||[]).map(function(b){
     var buzz = b.phase.toLowerCase()==='inhale' ? '1 buzz' : '2 buzz';
@@ -365,7 +372,8 @@ function fmt(sec){ return Math.floor(sec/60)+':'+('0'+(sec%60)).slice(-2); }
 function toggleItem(id){
   var i=itemIndex(id);
   if(i>=0) session.items.splice(i,1);
-  else { var e=exById(id); session.items.push({ id:e.id, name:e.name, reps:repsToInt(e.reps), movementLengthSec:4, restAfterSec:30 }); }
+  else { var e=exById(id); session.items.push({ id:e.id, name:e.name, reps:repsToInt(e.reps),
+    movementLengthSec:4, restAfterSec:30, betweenRepsSec:1, breathPattern:e.breathPattern, mode:e.mode||null }); }
   renderLibrary();
 }
 function open(name, id){ view={name:name,id:id||null}; window.scrollTo(0,0); render(); }
@@ -384,10 +392,11 @@ function setCTA(opt){
 // ---------- finish: return session to pkjs ----------
 function finish(){
   // strip to the fields the watch needs (fully-resolved items)
-  var payload = { version:1, name:session.name, settings:session.settings,
+  var payload = { version:2, name:session.name, settings:session.settings,
     items: session.items.map(function(it){ return {
       name: it.name, reps: it.reps,
-      movementLengthSec: it.movementLengthSec, restAfterSec: it.restAfterSec }; }) };
+      movementLengthSec: it.movementLengthSec, restAfterSec: it.restAfterSec,
+      betweenRepsSec: it.betweenRepsSec, breathPattern: it.breathPattern, mode: it.mode || null }; }) };
   document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(payload));
 }
 
