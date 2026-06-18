@@ -115,6 +115,18 @@
   .namein{font-family:'Fredoka';font-weight:600;font-size:29px;color:var(--ink);border:none;background:none;width:100%;outline:none}
   .empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:14px}
 
+  /* sessions list */
+  .srow{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--card-bd);
+        border-radius:14px;padding:12px;margin-bottom:8px;cursor:pointer}
+  .radio{width:22px;height:22px;border-radius:999px;border:2px solid var(--field-bd);background:#fff;
+         flex:0 0 auto;cursor:pointer;padding:0}
+  .radio.on{border-color:var(--purple);background:radial-gradient(var(--purple) 42%,#fff 46%)}
+  .activetag{font-size:9px;font-weight:800;color:var(--purple);background:var(--tint);
+             border-radius:999px;padding:2px 6px;margin-left:4px;vertical-align:middle}
+  .trash{background:none;border:none;font-size:15px;color:var(--faint2);cursor:pointer;flex:0 0 auto;padding:4px 6px}
+  .addsession{width:100%;background:#fff;border:1px dashed var(--field-bd);border-radius:14px;padding:13px;
+              color:var(--purple);font-weight:700;font-size:14px;cursor:pointer;margin-bottom:8px}
+
   /* bottom CTA */
   .ctabar{position:fixed;left:0;right:0;bottom:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));
           background:linear-gradient(rgba(251,247,241,0),var(--app) 30%);max-width:480px;margin:0 auto}
@@ -143,64 +155,127 @@ var CHAPTER_SUB = {
   'Back Extensions':'Open the front, strengthen the back'
 };
 var INTENSITY_LABELS = ['Gentle','Medium','Strong'];
-var session = { version:1, name:'My Mat Session',
-  settings:{ hapticsEnabled:true, intensity:1, leadInEnabled:true }, items:[] };
-var view = { name:'library', id:null };
+var SESSION_CAP = 6;
+// Collection of saved sessions; one is active (synced to the watch). Settings are global.
+var CO = { version:3, activeId:null,
+  settings:{ hapticsEnabled:true, intensity:1, leadInEnabled:true }, sessions:[] };
+var editing = null;            // id of the session currently being edited
+var view = { name:'sessions', id:null };
 var filter = 'all';
 var query = '';
 
 function $(sel){ return document.querySelector(sel); }
-function el(html){ var t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
 function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function repsToInt(s){ var m=String(s).match(/\d+/); return m?Math.max(1,parseInt(m[0],10)):5; }
 function exById(id){ return EXERCISES.find(function(e){return e.id===id;}); }
-function itemIndex(id){ return session.items.findIndex(function(it){return it.id===id;}); }
+function genId(){ return 's'+Math.floor(Math.random()*1e9).toString(36); }
+function cur(){ return CO.sessions.find(function(s){return s.id===editing;}) || CO.sessions[0]; }
+function itemIndex(id){ return cur().items.findIndex(function(it){return it.id===id;}); }
 
-// ---------- seed from pkjs (?session=) ----------
+function mapItems(arr){ return (arr||[]).map(function(it){ return {
+  id: it.id || null, name: it.name,
+  reps: it.reps||5,
+  movementLengthSec: it.movementLengthSec || 4,
+  restAfterSec: (it.restAfterSec==null?30:it.restAfterSec),
+  breathPattern: it.breathPattern || null,
+  mode: it.mode || null }; }); }
+function defaultSettings(){ return { hapticsEnabled:true, intensity:1, leadInEnabled:true }; }
+function newSessionObj(name){ return { id:genId(), name:name||'New session', items:[] }; }
+function wrapSingle(s){
+  var sess = { id:genId(), name:(s&&s.name)||'My Mat Session', items:mapItems(s&&s.items) };
+  return { version:3, activeId:sess.id,
+    settings:Object.assign(defaultSettings(), (s&&s.settings)||{}), sessions:[sess] };
+}
+function normalizeCollection(c){
+  var sessions = (c.sessions||[]).map(function(s){
+    return { id:s.id||genId(), name:s.name||'Session', items:mapItems(s.items) }; });
+  if(!sessions.length) sessions=[newSessionObj('My Mat Session')];
+  var activeId = c.activeId;
+  if(!sessions.some(function(s){return s.id===activeId;})) activeId=sessions[0].id;
+  return { version:3, activeId:activeId,
+    settings:Object.assign(defaultSettings(), c.settings||{}), sessions:sessions };
+}
+
+// ---------- seed from pkjs ----------
 function seed(){
   try{
-    var p = new URLSearchParams(location.search).get('session');
-    if(p){ var s = JSON.parse(decodeURIComponent(p));
-      if(s && s.items){
-        session.name = s.name || session.name;
-        session.settings = Object.assign(session.settings, s.settings||{});
-        session.items = s.items.map(function(it){ return {
-          id: it.id || null, name: it.name,
-          reps: it.reps||5,
-          movementLengthSec: it.movementLengthSec || 4,
-          restAfterSec: (it.restAfterSec==null?30:it.restAfterSec),
-          betweenRepsSec: (it.betweenRepsSec==null?1:it.betweenRepsSec),
-          breathPattern: it.breathPattern || null,
-          mode: it.mode || null }; });
-      }
-    }
+    var params = new URLSearchParams(location.search);
+    var d = params.get('data');
+    if(d){ var c=JSON.parse(decodeURIComponent(d));
+      CO = (c && c.sessions) ? normalizeCollection(c) : wrapSingle(c||{}); }
+    else { var p=params.get('session'); if(p) CO = wrapSingle(JSON.parse(decodeURIComponent(p))); }
   }catch(e){ console.log('seed parse failed', e); }
+  if(!CO.sessions.length) CO.sessions=[newSessionObj('My Mat Session')];
+  if(!CO.sessions.some(function(s){return s.id===CO.activeId;})) CO.activeId=CO.sessions[0].id;
+  editing = CO.activeId;
 }
-// resolve item ids by name once exercises are loaded
+// resolve item ids/names/patterns from the dataset, across every session
 function reconcile(){
-  session.items.forEach(function(it){
-    if(!it.id){ var m = EXERCISES.find(function(e){return e.name===it.name;}); if(m) it.id=m.id; }
-    var e = exById(it.id);
-    if(e){ it.breathPattern = e.breathPattern; it.mode = e.mode || null; }  // always refresh from source
-    if(it.betweenRepsSec == null) it.betweenRepsSec = 1;
+  CO.sessions.forEach(function(sess){
+    sess.items.forEach(function(it){
+      if(!it.id){ var m=EXERCISES.find(function(e){return e.name===it.name;}); if(m) it.id=m.id; }
+      var e=exById(it.id);
+      if(e){ it.name=e.name; it.breathPattern=e.breathPattern; it.mode=e.mode||null; }
+    });
+    sess.items = sess.items.filter(function(it){return it.id;});
   });
-  session.items = session.items.filter(function(it){return it.id;});
 }
 
 // ---------- duration estimate ----------
-function estMinutes(){
-  var lead = session.settings.leadInEnabled ? 3 : 0;
-  var secs = session.items.reduce(function(t,it){
+function estMinutes(sess){
+  sess = sess || cur();
+  var lead = CO.settings.leadInEnabled ? 3 : 0;
+  var secs = sess.items.reduce(function(t,it){
     return t + lead + it.reps*2*it.movementLengthSec + it.restAfterSec; }, 0);
   return Math.max(1, Math.round(secs/60));
 }
 
+// ---------- session-library actions ----------
+function setActive(id){ CO.activeId=id; }
+function openSession(id){ editing=id; open('library'); }
+function addSession(){
+  if(CO.sessions.length>=SESSION_CAP) return;
+  var s=newSessionObj('Session '+(CO.sessions.length+1)); CO.sessions.push(s); openSession(s.id);
+}
+function deleteSession(id){
+  CO.sessions = CO.sessions.filter(function(s){return s.id!==id;});
+  if(!CO.sessions.length) CO.sessions=[newSessionObj('My Mat Session')];
+  if(CO.activeId===id) CO.activeId=CO.sessions[0].id;
+}
+
 // ---------- views ----------
 function render(){
-  ({ library:renderLibrary, configure:renderConfigure, settings:renderSettings, ready:renderReady }[view.name])();
+  ({ sessions:renderSessions, library:renderLibrary, configure:renderConfigure,
+     settings:renderSettings, ready:renderReady }[view.name])();
+}
+
+function renderSessions(){
+  var rows = CO.sessions.map(function(s){
+    var active = s.id===CO.activeId;
+    return '<div class="srow" data-open="'+s.id+'">'+
+      '<button class="radio '+(active?'on':'')+'" data-active="'+s.id+'"></button>'+
+      '<div class="grow"><div class="nm">'+esc(s.name)+(active?' <span class="activetag">ACTIVE</span>':'')+'</div>'+
+      '<div class="rp">'+s.items.length+' move'+(s.items.length!==1?'s':'')+' · ~'+estMinutes(s)+' min</div></div>'+
+      '<button class="trash" data-del="'+s.id+'">✕</button></div>';
+  }).join('');
+  var canAdd = CO.sessions.length < SESSION_CAP;
+  $('#app').innerHTML =
+    '<header><div class="eyebrow">PILATES · MAT WORK</div><h1>Your sessions</h1>'+
+    '<div class="countline">Pick one as active to sync it to your watch.</div></header>'+
+    rows +
+    (canAdd ? '<button class="addsession" id="addS">+ New session</button>'
+            : '<div class="sub" style="text-align:center;padding:6px">Up to '+SESSION_CAP+' sessions.</div>')+
+    '<div class="linkrow"><button class="link">⚙ Breathing &amp; buzz</button></div>';
+  document.querySelectorAll('[data-open]').forEach(function(r){ r.onclick=function(){ openSession(r.dataset.open); }; });
+  document.querySelectorAll('[data-active]').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); setActive(b.dataset.active); renderSessions(); }; });
+  document.querySelectorAll('[data-del]').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); deleteSession(b.dataset.del); renderSessions(); }; });
+  if(canAdd) $('#addS').onclick=function(){ addSession(); };
+  $('.link').onclick=function(){ open('settings'); };
+  setCTA({ full:true, label:'Done · sync active to watch', action:finish });
 }
 
 function renderLibrary(){
+  var session = cur();
   var groups = {};
   var order = [];
   EXERCISES.forEach(function(e){
@@ -229,19 +304,19 @@ function renderLibrary(){
   }).join('') || '<div class="empty">No exercises match.</div>';
 
   $('#app').innerHTML =
-    '<header><div class="eyebrow">PILATES · MAT WORK</div>'+
+    '<header><button class="backrow">‹ Sessions</button>'+
+    '<div class="eyebrow">EDITING · '+esc(session.name.toUpperCase())+'</div>'+
     '<h1>The repertoire</h1>'+
-    '<div class="countline">'+EXERCISES.length+' exercises · 6 chapters · 3 levels</div>'+
+    '<div class="countline">'+session.items.length+' added · tap a move to add or tune</div>'+
     '<div class="search"><span>🔍</span><input id="q" placeholder="Search exercises" value="'+esc(query)+'"></div>'+
     '<div class="chips">'+chips+'</div></header>'+
-    '<div class="linkrow"><button class="link" data-view="settings">⚙ Breathing &amp; buzz</button></div>'+
     list;
 
+  $('.backrow').onclick=function(){ open('sessions'); };
   $('#q').addEventListener('input', function(e){ query=e.target.value.toLowerCase(); renderLibrary(); });
   document.querySelectorAll('.chip').forEach(function(c){ c.onclick=function(){ filter=c.dataset.f; renderLibrary(); }; });
   document.querySelectorAll('[data-add]').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); toggleItem(b.dataset.add); }; });
   document.querySelectorAll('[data-go]').forEach(function(r){ r.onclick=function(){ open('configure', r.dataset.go); }; });
-  $('.link').onclick=function(){ open('settings'); };
 
   setCTA(session.items.length
     ? { left:session.items.length+' move'+(session.items.length>1?'s':''), right:'Review session →', action:function(){ open('ready'); } }
@@ -249,10 +324,11 @@ function renderLibrary(){
 }
 
 function renderConfigure(){
+  var session = cur();
   var e = exById(view.id); if(!e){ open('library'); return; }
   var idx = itemIndex(e.id);
   var item = idx>=0 ? session.items[idx] : { id:e.id, name:e.name, reps:repsToInt(e.reps),
-    movementLengthSec:4, restAfterSec:30, betweenRepsSec:1, breathPattern:e.breathPattern, mode:e.mode||null };
+    movementLengthSec:4, restAfterSec:30, breathPattern:e.breathPattern, mode:e.mode||null };
 
   var breath = (e.breathShort||[]).map(function(b){
     var buzz = b.phase.toLowerCase()==='inhale' ? '1 buzz' : '2 buzz';
@@ -312,9 +388,9 @@ function renderConfigure(){
 }
 
 function renderSettings(){
-  var s = session.settings;
+  var s = CO.settings;
   $('#app').innerHTML =
-    '<button class="backrow" data-view="library">‹ The repertoire</button>'+
+    '<button class="backrow">‹ Sessions</button>'+
     '<div class="eyebrow">ON YOUR WRIST</div><h1>Breathing cues</h1>'+
     '<div class="countline">One buzz to breathe in, two to breathe out.</div>'+
     '<div class="card" style="margin-top:14px"><div class="stepperrow"><div><div class="lab">Vibration cues</div>'+
@@ -329,14 +405,15 @@ function renderSettings(){
     '<div class="card"><div class="stepperrow"><div><div class="lab">3·2·1 lead-in</div>'+
       '<div class="sub">Count-in before each set</div></div>'+toggle('leadin',s.leadInEnabled)+'</div></div>';
 
-  $('.backrow').onclick=function(){ open('library'); };
+  $('.backrow').onclick=function(){ open('sessions'); };
   $('[data-toggle=haptics]').onchange=function(e){ s.hapticsEnabled=e.target.checked; };
   $('[data-toggle=leadin]').onchange=function(e){ s.leadInEnabled=e.target.checked; };
   document.querySelectorAll('[data-int]').forEach(function(b){ b.onclick=function(){ s.intensity=parseInt(b.dataset.int,10); renderSettings(); }; });
-  setCTA({ full:true, label:'Done', action:function(){ open('library'); } });
+  setCTA({ full:true, label:'Done', action:function(){ open('sessions'); } });
 }
 
 function renderReady(){
+  var session = cur();
   var n = session.items.length;
   var items = session.items.map(function(it,i){
     var rest = (i<n-1 && it.restAfterSec>0)
@@ -352,15 +429,16 @@ function renderReady(){
     '<div class="eyebrow">TODAY · YOUR PROGRAM</div>'+
     '<input class="namein" id="nm" value="'+esc(session.name)+'">'+
     '<div class="countline">'+n+' move'+(n!==1?'s':'')+' · about '+estMinutes()+' min</div>'+
-    '<div class="conn"><i></i>Syncs to Pebble Time 2 on start</div>'+
-    (n? items : '<div class="empty">No moves yet — add some from the repertoire.</div>');
+    '<div class="conn"><i></i>Make active to sync this one to the watch</div>'+
+    (n? items : '<div class="empty">No moves yet. Go back and add some from the repertoire.</div>');
 
   $('.backrow').onclick=function(){ open('library'); };
   $('#nm').addEventListener('input', function(e){ session.name=e.target.value; });
   document.querySelectorAll('[data-rm]').forEach(function(b){ b.onclick=function(){ var i=itemIndex(b.dataset.rm); if(i>=0)session.items.splice(i,1); renderReady(); }; });
   document.querySelectorAll('[data-edit]').forEach(function(b){ b.onclick=function(){ open('configure', b.dataset.edit); }; });
 
-  setCTA({ full:true, label:'▶ Start on watch', disabled:!n, action:finish });
+  setCTA({ full:true, label:'▶ Make active & sync to watch', disabled:!n,
+    action:function(){ setActive(cur().id); finish(); } });
 }
 
 // ---------- helpers ----------
@@ -370,10 +448,11 @@ function toggle(name, on){
 }
 function fmt(sec){ return Math.floor(sec/60)+':'+('0'+(sec%60)).slice(-2); }
 function toggleItem(id){
+  var session = cur();
   var i=itemIndex(id);
   if(i>=0) session.items.splice(i,1);
   else { var e=exById(id); session.items.push({ id:e.id, name:e.name, reps:repsToInt(e.reps),
-    movementLengthSec:4, restAfterSec:30, betweenRepsSec:1, breathPattern:e.breathPattern, mode:e.mode||null }); }
+    movementLengthSec:4, restAfterSec:30, breathPattern:e.breathPattern, mode:e.mode||null }); }
   renderLibrary();
 }
 function open(name, id){ view={name:name,id:id||null}; window.scrollTo(0,0); render(); }
@@ -389,14 +468,14 @@ function setCTA(opt){
   var btn=$('#cta .cta'); if(btn && opt.action && !opt.disabled) btn.onclick=opt.action;
 }
 
-// ---------- finish: return session to pkjs ----------
+// ---------- finish: return the whole collection to pkjs ----------
 function finish(){
-  // strip to the fields the watch needs (fully-resolved items)
-  var payload = { version:2, name:session.name, settings:session.settings,
-    items: session.items.map(function(it){ return {
-      name: it.name, reps: it.reps,
-      movementLengthSec: it.movementLengthSec, restAfterSec: it.restAfterSec,
-      betweenRepsSec: it.betweenRepsSec, breathPattern: it.breathPattern, mode: it.mode || null }; }) };
+  var payload = { version:CO.version, activeId:CO.activeId, settings:CO.settings,
+    sessions: CO.sessions.map(function(s){ return { id:s.id, name:s.name,
+      items: s.items.map(function(it){ return {
+        id: it.id, name: it.name, reps: it.reps,
+        movementLengthSec: it.movementLengthSec, restAfterSec: it.restAfterSec,
+        breathPattern: it.breathPattern, mode: it.mode || null }; }) }; }) };
   document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(payload));
 }
 
