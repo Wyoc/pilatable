@@ -30,22 +30,26 @@ static const Settings DEFAULT_SETTINGS = {
 
 // Baked-in default program (factual Fundamental Mat names — safe to ship).
 // Timings are sensible starting defaults; the phone overrides on first sync.
+// "Daily Flow" — a chill-but-challenging starter: gentle warm-up, a couple of
+// honest challenges, then a calm finish. Mostly Fundamental + Intermediate.
 // Fields: name, reps, movement_ds, rest_s, between_ds, mode, pattern, pattern_len
 static const SessionItem DEFAULT_ITEMS[] = {
-  { "Pelvic Curl",              5,  50, 30, 10, MODE_NORMAL, "EIE", 3 },
-  { "Chest Lift",              10,  40, 30, 10, MODE_NORMAL, "EIE", 3 },
-  { "Leg Lift Supine",          5,  40, 30, 10, MODE_NORMAL, "EI",  2 },
-  { "Spine Twist Supine",       5,  40, 30, 10, MODE_NORMAL, "EI",  2 },
-  { "Chest Lift With Rotation", 5,  40, 30, 10, MODE_NORMAL, "EI",  2 },
-  { "Back Extension Prone",     5,  50, 30, 10, MODE_NORMAL, "EI",  2 },
-  { "One-Leg Circle",           5,  40, 30, 10, MODE_NORMAL, "EI",  2 },
-  { "Rolling Back",            10,  40,  0, 10, MODE_NORMAL, "IE",  2 },
+  { "Pelvic Curl",        5,  50, 20, 10, MODE_NORMAL,     "EIE",  3 },
+  { "Chest Lift",         8,  40, 20, 10, MODE_NORMAL,     "EIE",  3 },
+  { "Hundred",           10,  30, 25, 10, MODE_HUNDRED,    "IE",   2 },
+  { "Roll-Up",            5,  40, 20, 10, MODE_NORMAL,     "IEIE", 4 },
+  { "One-Leg Stretch",    8,  30, 20, 10, MODE_NORMAL,     "IE",   2 },
+  { "Crisscross",         6,  30, 20, 10, MODE_NORMAL,     "EI",   2 },
+  { "Spine Twist",        5,  35, 20, 10, MODE_NORMAL,     "EI",   2 },
+  { "Swimming",          10,  30, 25, 10, MODE_CONTINUOUS, "IE",   2 },
+  { "Spine Stretch",      4,  50, 20, 10, MODE_NORMAL,     "EI",   2 },
+  { "Rolling Back",       6,  35,  0, 10, MODE_NORMAL,     "IE",   2 },
 };
 #define DEFAULT_ITEM_COUNT (sizeof(DEFAULT_ITEMS) / sizeof(DEFAULT_ITEMS[0]))
 
 void session_load_default(Session *out_session) {
   out_session->version = PILATABLE_PROTOCOL_VERSION;
-  strncpy(out_session->name, "Fundamental Mat", SESSION_NAME_LEN - 1);
+  strncpy(out_session->name, "Daily Flow", SESSION_NAME_LEN - 1);
   out_session->name[SESSION_NAME_LEN - 1] = '\0';
   out_session->item_count = DEFAULT_ITEM_COUNT;
   for (uint8_t i = 0; i < DEFAULT_ITEM_COUNT; i++) {

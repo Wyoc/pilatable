@@ -20,18 +20,22 @@ var LEGACY_KEY = 'pilatable.session.v1';
 // it returns and relays the active session to the watch.
 
 function defaultSession() {
-  var IE = ['inhale', 'exhale'], EI = ['exhale', 'inhale'], EIE = ['exhale', 'inhale', 'exhale'];
+  // "Daily Flow" — chill but challenging starter (mirrors the watch's baked-in default).
+  var IE = ['inhale', 'exhale'], EI = ['exhale', 'inhale'],
+      EIE = ['exhale', 'inhale', 'exhale'], IEIE = ['inhale', 'exhale', 'inhale', 'exhale'];
   return {
-    id: 'fundamental', name: 'Fundamental Mat',
+    id: 'daily-flow', name: 'Daily Flow',
     items: [
-      { id: 'pelvic-curl', name: 'Pelvic Curl', reps: 5, movementLengthSec: 5.0, restAfterSec: 30, breathPattern: EIE },
-      { id: 'chest-lift', name: 'Chest Lift', reps: 10, movementLengthSec: 4.0, restAfterSec: 30, breathPattern: EIE },
-      { id: 'leg-lift-supine', name: 'Leg Lift Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, breathPattern: EI },
-      { id: 'spine-twist-supine', name: 'Spine Twist Supine', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, breathPattern: EI },
-      { id: 'chest-lift-with-rotation', name: 'Chest Lift With Rotation', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, breathPattern: EI },
-      { id: 'back-extension-prone', name: 'Back Extension Prone', reps: 5, movementLengthSec: 5.0, restAfterSec: 30, breathPattern: EI },
-      { id: 'one-leg-circle', name: 'One-Leg Circle', reps: 5, movementLengthSec: 4.0, restAfterSec: 30, breathPattern: EI },
-      { id: 'rolling-back', name: 'Rolling Back', reps: 10, movementLengthSec: 4.0, restAfterSec: 0, breathPattern: IE }
+      { id: 'pelvic-curl', name: 'Pelvic Curl', reps: 5, movementLengthSec: 5.0, restAfterSec: 20, breathPattern: EIE },
+      { id: 'chest-lift', name: 'Chest Lift', reps: 8, movementLengthSec: 4.0, restAfterSec: 20, breathPattern: EIE },
+      { id: 'hundred', name: 'Hundred', reps: 10, movementLengthSec: 3.0, restAfterSec: 25, breathPattern: IE, mode: 'hundred' },
+      { id: 'roll-up', name: 'Roll-Up', reps: 5, movementLengthSec: 4.0, restAfterSec: 20, breathPattern: IEIE },
+      { id: 'one-leg-stretch', name: 'One-Leg Stretch', reps: 8, movementLengthSec: 3.0, restAfterSec: 20, breathPattern: IE },
+      { id: 'crisscross', name: 'Crisscross', reps: 6, movementLengthSec: 3.0, restAfterSec: 20, breathPattern: EI },
+      { id: 'spine-twist', name: 'Spine Twist', reps: 5, movementLengthSec: 3.5, restAfterSec: 20, breathPattern: EI },
+      { id: 'swimming', name: 'Swimming', reps: 10, movementLengthSec: 3.0, restAfterSec: 25, breathPattern: IE, mode: 'continuous' },
+      { id: 'spine-stretch', name: 'Spine Stretch', reps: 4, movementLengthSec: 5.0, restAfterSec: 20, breathPattern: EI },
+      { id: 'rolling-back', name: 'Rolling Back', reps: 6, movementLengthSec: 3.5, restAfterSec: 0, breathPattern: IE }
     ]
   };
 }
