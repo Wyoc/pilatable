@@ -2,63 +2,403 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Pilatable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --purple:#7A3DA8; --tint:#F0E7F6; --bg:#FBF7F1; --card:#fff;
-          --border:#F0E8DD; --ink:#2C2620; --muted:#8C8278; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,sans-serif;
-         background:var(--bg); color:var(--ink); padding:18px; }
-  .eyebrow { font-size:11px; font-weight:800; letter-spacing:2px; color:#A99F94; }
-  h1 { font-size:26px; margin:4px 0 12px; }
-  .item { background:var(--card); border:1px solid var(--border); border-radius:13px;
-          padding:10px 12px; margin-bottom:8px; }
-  .cta { position:sticky; bottom:0; width:100%; background:var(--purple); color:#fff;
-         border:none; border-radius:16px; padding:14px; font-size:16px; margin-top:12px; }
-  .note { background:var(--tint); color:#5E2E84; border-radius:12px; padding:10px 12px;
-          font-size:13px; margin-bottom:12px; }
+  :root{
+    --purple:#7A3DA8; --tint:#F0E7F6; --tint-ink:#5E2E84;
+    --app:#FBF7F1; --card:#FFFFFF; --card-bd:#F0E8DD; --field-bd:#ECE3D8; --tray:#F6EFE6;
+    --ink:#2C2620; --body:#574F47; --body2:#5A524A; --muted:#8C8278; --faint:#A99F94; --faint2:#B0A89E;
+    --dash:#DCD2C5; --ring-trk:#ECE3D8;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:'Nunito',-apple-system,Segoe UI,Roboto,sans-serif;background:var(--app);color:var(--ink);
+       padding:0 18px 96px;max-width:480px;margin:0 auto;-webkit-font-smoothing:antialiased}
+  .fred{font-family:'Fredoka',sans-serif}
+  .hidden{display:none!important}
+
+  /* header */
+  header{padding:18px 0 8px;position:sticky;top:0;background:linear-gradient(var(--app) 78%,rgba(251,247,241,0));z-index:5}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--faint)}
+  h1{font-family:'Fredoka';font-weight:600;font-size:29px;color:var(--ink);margin:4px 0 2px}
+  .countline{font-size:12.5px;color:var(--muted)}
+  .backrow{display:flex;align-items:center;gap:6px;color:var(--purple);font-weight:700;font-size:14px;
+           background:none;border:none;padding:8px 0;cursor:pointer}
+
+  /* search + chips */
+  .search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--field-bd);border-radius:14px;
+          padding:11px 13px;margin:10px 0}
+  .search input{border:none;outline:none;font-size:13.5px;font-family:inherit;width:100%;color:var(--ink);background:none}
+  .search input::placeholder{color:var(--faint2)}
+  .chips{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .chip{border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700;border:1px solid var(--field-bd);
+        background:#fff;color:var(--muted);cursor:pointer}
+  .chip.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+  /* chapter group + rows */
+  .chapter{margin:16px 0 8px}
+  .chapter .h{font-family:'Fredoka';font-weight:600;font-size:13px;color:var(--purple)}
+  .chapter .s{font-size:10.5px;color:var(--faint)}
+  .row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--card-bd);border-radius:13px;
+       padding:10px 12px;margin-bottom:8px;cursor:pointer}
+  .row .nm{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .row .alt{color:#A39A8F;font-weight:600;font-size:11px}
+  .row .rp{font-size:11px;color:#9A9086;margin-top:1px}
+  .row .grow{flex:1;min-width:0}
+  .badge{border-radius:999px;padding:3px 7px;font-size:8.5px;font-weight:800;letter-spacing:.5px;white-space:nowrap}
+  .badge.F{background:#EDE6DB;color:#8C8278}
+  .badge.I{background:#F0E7F6;color:#7A3DA8}
+  .badge.A{background:#7A3DA8;color:#fff}
+  .addbtn{width:28px;height:28px;border-radius:999px;border:1px solid var(--field-bd);background:#fff;color:var(--purple);
+          font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;flex:0 0 auto;cursor:pointer}
+  .addbtn.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+  /* configure */
+  .pose{height:120px;border-radius:18px;margin:6px 0 14px;display:flex;align-items:center;justify-content:center;
+        color:var(--purple);font-weight:800;font-size:11px;letter-spacing:1px;
+        background-image:repeating-linear-gradient(45deg,var(--tint),var(--tint) 8px,#fff 8px,#fff 16px)}
+  .tagpill{display:inline-block;background:var(--tint);color:var(--purple);border-radius:999px;padding:4px 10px;
+           font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin:2px 0 12px}
+  .card{background:#fff;border:1px solid var(--card-bd);border-radius:16px;padding:14px;margin-bottom:10px}
+  .card .lab{font-size:13px;font-weight:800;color:var(--ink)}
+  .card .sub{font-size:11px;color:var(--muted);margin-top:2px}
+  .cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .cardhead .t{font-family:'Fredoka';font-weight:600;font-size:14px;color:var(--ink)}
+  .cardhead .tag{font-size:10px;font-weight:800;color:var(--purple);background:var(--tint);border-radius:999px;padding:3px 8px}
+  .stepperrow{display:flex;justify-content:space-between;align-items:center}
+  .stepper{display:flex;align-items:center;gap:10px;background:var(--tray);border-radius:12px;padding:5px 8px}
+  .stepper button{width:26px;height:26px;border-radius:999px;border:none;font-size:18px;line-height:1;cursor:pointer}
+  .stepper .minus{background:#fff;border:1px solid var(--field-bd);color:var(--ink)}
+  .stepper .plus{background:var(--purple);color:#fff}
+  .stepper .val{font-family:'Fredoka';font-weight:600;font-size:17px;min-width:46px;text-align:center}
+  input[type=range]{width:100%;accent-color:var(--purple);margin:10px 0 4px}
+  .ends{display:flex;justify-content:space-between;font-size:10px;color:var(--faint)}
+  .breathrow{display:flex;gap:10px;padding:7px 0;border-top:1px solid #F4EEE5}
+  .breathrow:first-of-type{border-top:none}
+  .breathrow .ph{flex:0 0 70px}
+  .breathrow .ph .p{font-family:'Fredoka';font-weight:600;font-size:11.5px;color:var(--purple)}
+  .breathrow .ph .b{font-size:9.5px;color:var(--faint)}
+  .breathrow .ac{font-size:11.5px;color:var(--body2);line-height:1.4}
+  .cue{display:flex;gap:8px;padding:5px 0;font-size:12px;color:var(--body2);line-height:1.4}
+  .cue .dot{flex:0 0 6px;width:6px;height:6px;border-radius:999px;background:var(--purple);margin-top:6px}
+
+  /* settings */
+  .toggle{position:relative;width:46px;height:27px;flex:0 0 auto}
+  .toggle input{opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .toggle .tr{position:absolute;inset:0;border-radius:999px;background:#D9CFC2;transition:.15s;pointer-events:none}
+  .toggle .kn{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:999px;background:#fff;
+              box-shadow:0 2px 5px rgba(0,0,0,.12);transition:.15s;pointer-events:none}
+  .toggle input:checked ~ .tr{background:var(--purple)}
+  .toggle input:checked ~ .kn{left:22px}
+  .seg{display:flex;background:var(--tray);border-radius:12px;padding:3px;gap:3px}
+  .seg button{flex:1;border:none;background:none;padding:8px;border-radius:9px;font-weight:700;font-size:12px;color:var(--muted);cursor:pointer}
+  .seg button.on{background:var(--purple);color:#fff}
+  .diagram{display:flex;gap:14px}
+  .diagram .col{flex:1;text-align:center}
+  .dots{display:flex;justify-content:center;gap:5px;margin-top:8px}
+  .dots i{width:10px;height:10px;border-radius:999px;background:var(--purple);display:inline-block}
+  .dots i.grey{background:#CFC6BA}
+
+  /* ready */
+  .conn{display:inline-flex;align-items:center;gap:7px;background:var(--tint);color:var(--purple);border-radius:999px;
+        padding:6px 12px;font-size:12px;font-weight:700;margin:6px 0 14px}
+  .conn i{width:8px;height:8px;border-radius:999px;background:var(--purple)}
+  .oitem{display:flex;align-items:center;gap:10px;padding:4px 0}
+  .num{width:26px;height:26px;border-radius:999px;background:var(--tint);color:var(--purple);font-weight:800;font-size:12px;
+       display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .restdiv{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--faint);border-top:1px dashed var(--dash);
+           margin:6px 0 6px 36px;padding-top:4px}
+  .namein{font-family:'Fredoka';font-weight:600;font-size:29px;color:var(--ink);border:none;background:none;width:100%;outline:none}
+  .empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:14px}
+
+  /* bottom CTA */
+  .ctabar{position:fixed;left:0;right:0;bottom:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+          background:linear-gradient(rgba(251,247,241,0),var(--app) 30%);max-width:480px;margin:0 auto}
+  .cta{display:flex;justify-content:space-between;align-items:center;background:var(--purple);color:#fff;border:none;
+       border-radius:16px;padding:15px 18px;font-family:'Fredoka';font-weight:600;font-size:16px;width:100%;cursor:pointer}
+  .cta.full{justify-content:center;gap:8px}
+  .cta:disabled{opacity:.45}
+  .linkrow{display:flex;justify-content:flex-end;margin-top:-2px}
+  .link{background:none;border:none;color:var(--purple);font-weight:700;font-size:13px;cursor:pointer;padding:6px 0}
 </style>
 </head>
 <body>
-  <div class="eyebrow">PILATES · MAT WORK</div>
-  <h1 id="title">Session</h1>
-  <div class="note">
-    Scaffold config page. Build-order step 3 replaces this with the full
-    Library → Configure → Breathing &amp; Buzz → Session Ready flow.
-    For now it round-trips the seeded session back to the watch.
-  </div>
-  <div id="items"></div>
-  <button class="cta" id="save">Save &amp; send to watch</button>
+<div id="app"></div>
+<div id="cta" class="ctabar"></div>
 
 <script>
-  function getParam(name) {
-    var m = new RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
-    return m ? decodeURIComponent(m[1]) : null;
-  }
+"use strict";
+// ---------- state ----------
+var EXERCISES = [];
+var CHAPTER_SUB = {
+  'Foundation':'Build the basics',
+  'Abdominal Work':'Powerhouse & control',
+  'Fine Articulation':'Rolling & spinal control',
+  'Bridging':'Full-body integration',
+  'Side Exercises':'Waist & rotation',
+  'Back Extensions':'Open the front, strengthen the back'
+};
+var INTENSITY_LABELS = ['Gentle','Medium','Strong'];
+var session = { version:1, name:'My Mat Session',
+  settings:{ hapticsEnabled:true, intensity:1, leadInEnabled:true }, items:[] };
+var view = { name:'library', id:null };
+var filter = 'all';
+var query = '';
 
-  var session;
-  try { session = JSON.parse(getParam('session')); } catch (e) { session = null; }
-  if (!session) {
-    session = { version:1, name:'Fundamental Mat',
-      settings:{ hapticsEnabled:true, intensity:1, leadInEnabled:true }, items:[] };
-  }
+function $(sel){ return document.querySelector(sel); }
+function el(html){ var t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function repsToInt(s){ var m=String(s).match(/\d+/); return m?Math.max(1,parseInt(m[0],10)):5; }
+function exById(id){ return EXERCISES.find(function(e){return e.id===id;}); }
+function itemIndex(id){ return session.items.findIndex(function(it){return it.id===id;}); }
 
-  document.getElementById('title').textContent = session.name;
-  var box = document.getElementById('items');
-  (session.items || []).forEach(function (it, i) {
-    var d = document.createElement('div');
-    d.className = 'item';
-    d.textContent = (i + 1) + '. ' + it.name + ' — ' + it.reps + ' reps · '
-                    + it.movementLengthSec + 's · rest ' + it.restAfterSec + 's';
-    box.appendChild(d);
+// ---------- seed from pkjs (?session=) ----------
+function seed(){
+  try{
+    var p = new URLSearchParams(location.search).get('session');
+    if(p){ var s = JSON.parse(decodeURIComponent(p));
+      if(s && s.items){
+        session.name = s.name || session.name;
+        session.settings = Object.assign(session.settings, s.settings||{});
+        session.items = s.items.map(function(it){ return {
+          id: it.id || null, name: it.name,
+          reps: it.reps||5,
+          movementLengthSec: it.movementLengthSec || 4,
+          restAfterSec: (it.restAfterSec==null?30:it.restAfterSec) }; });
+      }
+    }
+  }catch(e){ console.log('seed parse failed', e); }
+}
+// resolve item ids by name once exercises are loaded
+function reconcile(){
+  session.items.forEach(function(it){
+    if(!it.id){ var m = EXERCISES.find(function(e){return e.name===it.name;}); if(m) it.id=m.id; }
   });
+  session.items = session.items.filter(function(it){return it.id;});
+}
 
-  document.getElementById('save').addEventListener('click', function () {
-    // Return the session to the PebbleKit JS via the close URL.
-    var payload = encodeURIComponent(JSON.stringify(session));
-    document.location = 'pebblejs://close#' + payload;
+// ---------- duration estimate ----------
+function estMinutes(){
+  var lead = session.settings.leadInEnabled ? 3 : 0;
+  var secs = session.items.reduce(function(t,it){
+    return t + lead + it.reps*2*it.movementLengthSec + it.restAfterSec; }, 0);
+  return Math.max(1, Math.round(secs/60));
+}
+
+// ---------- views ----------
+function render(){
+  ({ library:renderLibrary, configure:renderConfigure, settings:renderSettings, ready:renderReady }[view.name])();
+}
+
+function renderLibrary(){
+  var groups = {};
+  var order = [];
+  EXERCISES.forEach(function(e){
+    if(filter!=='all' && e.levelCode!==filter) return;
+    if(query && (e.name+' '+(e.alt||'')).toLowerCase().indexOf(query)<0) return;
+    if(!groups[e.chapter]){ groups[e.chapter]=[]; order.push(e.chapter); }
+    groups[e.chapter].push(e);
   });
+  var chips = ['all','F','I','A'].map(function(f){
+    var label = {all:'All',F:'Fund',I:'Int',A:'Adv'}[f];
+    return '<button class="chip '+(filter===f?'active':'')+'" data-f="'+f+'">'+label+'</button>';
+  }).join('');
+  var list = order.map(function(ch){
+    var rows = groups[ch].map(function(e){
+      var on = itemIndex(e.id)>=0;
+      return '<div class="row" data-go="'+e.id+'">'+
+        '<div class="grow"><div class="nm">'+esc(e.name)+
+          (e.alt?' <span class="alt">('+esc(e.alt)+')</span>':'')+'</div>'+
+          '<div class="rp">'+esc(e.reps)+'</div></div>'+
+        '<span class="badge '+e.levelCode+'">'+e.level.slice(0,(e.levelCode==='F'?4:3)).toUpperCase()+'</span>'+
+        '<button class="addbtn '+(on?'on':'')+'" data-add="'+e.id+'">'+(on?'✓':'+')+'</button>'+
+      '</div>';
+    }).join('');
+    return '<div class="chapter"><div class="h">'+esc(ch)+'</div><div class="s">'+
+      esc(CHAPTER_SUB[ch]||'')+'</div></div>'+rows;
+  }).join('') || '<div class="empty">No exercises match.</div>';
+
+  $('#app').innerHTML =
+    '<header><div class="eyebrow">PILATES · MAT WORK</div>'+
+    '<h1>The repertoire</h1>'+
+    '<div class="countline">'+EXERCISES.length+' exercises · 6 chapters · 3 levels</div>'+
+    '<div class="search"><span>🔍</span><input id="q" placeholder="Search exercises" value="'+esc(query)+'"></div>'+
+    '<div class="chips">'+chips+'</div></header>'+
+    '<div class="linkrow"><button class="link" data-view="settings">⚙ Breathing &amp; buzz</button></div>'+
+    list;
+
+  $('#q').addEventListener('input', function(e){ query=e.target.value.toLowerCase(); renderLibrary(); });
+  document.querySelectorAll('.chip').forEach(function(c){ c.onclick=function(){ filter=c.dataset.f; renderLibrary(); }; });
+  document.querySelectorAll('[data-add]').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); toggleItem(b.dataset.add); }; });
+  document.querySelectorAll('[data-go]').forEach(function(r){ r.onclick=function(){ open('configure', r.dataset.go); }; });
+  $('.link').onclick=function(){ open('settings'); };
+
+  setCTA(session.items.length
+    ? { left:session.items.length+' move'+(session.items.length>1?'s':''), right:'Review session →', action:function(){ open('ready'); } }
+    : { left:'No moves yet', right:'Tap + to add', disabled:true });
+}
+
+function renderConfigure(){
+  var e = exById(view.id); if(!e){ open('library'); return; }
+  var idx = itemIndex(e.id);
+  var item = idx>=0 ? session.items[idx] : { id:e.id, name:e.name, reps:repsToInt(e.reps), movementLengthSec:4, restAfterSec:30 };
+
+  var breath = (e.breathShort||[]).map(function(b){
+    var buzz = b.phase.toLowerCase()==='inhale' ? '1 buzz' : '2 buzz';
+    return '<div class="breathrow"><div class="ph"><div class="p">'+b.phase.toUpperCase()+'</div>'+
+      '<div class="b">'+buzz+'</div></div><div class="ac">'+esc(b.action)+'</div></div>';
+  }).join('');
+  var cues = (e.topCues||[]).map(function(c){ return '<div class="cue"><span class="dot"></span><span>'+esc(c)+'</span></div>'; }).join('');
+
+  $('#app').innerHTML =
+    '<button class="backrow" data-view="library">‹ The repertoire</button>'+
+    '<div class="pose">POSE</div>'+
+    '<h1 style="font-size:25px">'+esc(e.name)+(e.alt?' <span style="font-size:14px;color:#A39A8F">('+esc(e.alt)+')</span>':'')+'</h1>'+
+    '<div class="tagpill">'+esc(e.chapter)+' · '+esc(e.level)+'</div>'+
+    // reps
+    '<div class="card"><div class="stepperrow"><div><div class="lab">Repetitions</div>'+
+      '<div class="sub" id="repsSub"></div></div>'+
+      '<div class="stepper"><button class="minus" data-step="reps,-1">−</button>'+
+      '<span class="val" id="repsVal"></span><button class="plus" data-step="reps,1">+</button></div></div></div>'+
+    // movement length
+    '<div class="card"><div class="stepperrow"><div class="lab">Movement length</div>'+
+      '<div class="val fred" id="lenVal" style="color:var(--purple);font-size:17px"></div></div>'+
+      '<input type="range" id="len" min="2" max="8" step="0.5">'+
+      '<div class="ends"><span>slow &amp; deep</span><span>brisk</span></div>'+
+      '<div class="sub">Sets each inhale &amp; exhale on the watch.</div></div>'+
+    // rest
+    '<div class="card"><div class="stepperrow"><div><div class="lab">Rest after</div>'+
+      '<div class="sub">Before the next move</div></div>'+
+      '<div class="stepper"><button class="minus" data-step="rest,-5">−</button>'+
+      '<span class="val" id="restVal"></span><button class="plus" data-step="rest,5">+</button></div></div></div>'+
+    // breathing
+    '<div class="card"><div class="cardhead"><div class="t">Breathing sequence</div><div class="tag">1 IN · 2 OUT</div></div>'+breath+'</div>'+
+    // cues
+    '<div class="card"><div class="cardhead"><div class="t">How to do it well</div><div class="tag">TECHNIQUE</div></div>'+cues+'</div>';
+
+  // wire steppers/slider against a working copy `item`
+  function refresh(){
+    $('#repsVal').textContent = item.reps;
+    $('#repsSub').textContent = e.reps; // factual reps note
+    $('#lenVal').textContent = item.movementLengthSec.toFixed(1)+'s';
+    $('#len').value = item.movementLengthSec;
+    $('#restVal').textContent = item.restAfterSec+'s';
+  }
+  refresh();
+  document.querySelectorAll('[data-step]').forEach(function(b){ b.onclick=function(){
+    var parts=b.dataset.step.split(','), field=parts[0], delta=parseFloat(parts[1]);
+    if(field==='reps') item.reps=Math.min(50,Math.max(1,item.reps+delta));
+    if(field==='rest') item.restAfterSec=Math.min(120,Math.max(0,item.restAfterSec+delta));
+    refresh();
+  };});
+  $('#len').addEventListener('input', function(ev){ item.movementLengthSec=parseFloat(ev.target.value); refresh(); });
+  $('.backrow').onclick=function(){ open('library'); };
+
+  setCTA({ full:true, label:(idx>=0?'Update move':'Add to session'), action:function(){
+    if(idx>=0) session.items[idx]=item; else session.items.push(item);
+    open('library');
+  }});
+}
+
+function renderSettings(){
+  var s = session.settings;
+  $('#app').innerHTML =
+    '<button class="backrow" data-view="library">‹ The repertoire</button>'+
+    '<div class="eyebrow">ON YOUR WRIST</div><h1>Breathing cues</h1>'+
+    '<div class="countline">One buzz to breathe in, two to breathe out.</div>'+
+    '<div class="card" style="margin-top:14px"><div class="stepperrow"><div><div class="lab">Vibration cues</div>'+
+      '<div class="sub">Haptic rhythm during every rep</div></div>'+toggle('haptics',s.hapticsEnabled)+'</div></div>'+
+    '<div class="card"><div class="diagram">'+
+      '<div class="col"><div class="lab">Inhale</div><div class="sub">breathe in</div><div class="dots"><i></i></div></div>'+
+      '<div class="col"><div class="lab">Exhale</div><div class="sub">breathe out</div><div class="dots"><i></i><i></i></div></div>'+
+    '</div></div>'+
+    '<div class="card"><div class="lab">Intensity</div><div class="seg" id="seg">'+
+      INTENSITY_LABELS.map(function(l,i){ return '<button class="'+(s.intensity===i?'on':'')+'" data-int="'+i+'">'+l+'</button>'; }).join('')+
+    '</div></div>'+
+    '<div class="card"><div class="stepperrow"><div><div class="lab">3·2·1 lead-in</div>'+
+      '<div class="sub">Count-in before each set</div></div>'+toggle('leadin',s.leadInEnabled)+'</div></div>';
+
+  $('.backrow').onclick=function(){ open('library'); };
+  $('[data-toggle=haptics]').onchange=function(e){ s.hapticsEnabled=e.target.checked; };
+  $('[data-toggle=leadin]').onchange=function(e){ s.leadInEnabled=e.target.checked; };
+  document.querySelectorAll('[data-int]').forEach(function(b){ b.onclick=function(){ s.intensity=parseInt(b.dataset.int,10); renderSettings(); }; });
+  setCTA({ full:true, label:'Done', action:function(){ open('library'); } });
+}
+
+function renderReady(){
+  var n = session.items.length;
+  var items = session.items.map(function(it,i){
+    var rest = (i<n-1 && it.restAfterSec>0)
+      ? '<div class="restdiv">REST '+fmt(it.restAfterSec)+'</div>' : '';
+    return '<div class="oitem"><div class="num">'+(i+1)+'</div>'+
+      '<div class="grow"><div class="nm" data-edit="'+it.id+'">'+esc(it.name)+'</div>'+
+      '<div class="rp">'+it.reps+' reps · '+it.movementLengthSec.toFixed(1)+'s</div></div>'+
+      '<button class="addbtn on" data-rm="'+it.id+'">✓</button></div>'+rest;
+  }).join('');
+
+  $('#app').innerHTML =
+    '<button class="backrow" data-view="library">‹ Add more</button>'+
+    '<div class="eyebrow">TODAY · YOUR PROGRAM</div>'+
+    '<input class="namein" id="nm" value="'+esc(session.name)+'">'+
+    '<div class="countline">'+n+' move'+(n!==1?'s':'')+' · about '+estMinutes()+' min</div>'+
+    '<div class="conn"><i></i>Syncs to Pebble Time 2 on start</div>'+
+    (n? items : '<div class="empty">No moves yet — add some from the repertoire.</div>');
+
+  $('.backrow').onclick=function(){ open('library'); };
+  $('#nm').addEventListener('input', function(e){ session.name=e.target.value; });
+  document.querySelectorAll('[data-rm]').forEach(function(b){ b.onclick=function(){ var i=itemIndex(b.dataset.rm); if(i>=0)session.items.splice(i,1); renderReady(); }; });
+  document.querySelectorAll('[data-edit]').forEach(function(b){ b.onclick=function(){ open('configure', b.dataset.edit); }; });
+
+  setCTA({ full:true, label:'▶ Start on watch', disabled:!n, action:finish });
+}
+
+// ---------- helpers ----------
+function toggle(name, on){
+  return '<label class="toggle"><input type="checkbox" data-toggle="'+name+'" '+(on?'checked':'')+
+    '><span class="tr"></span><span class="kn"></span></label>';
+}
+function fmt(sec){ return Math.floor(sec/60)+':'+('0'+(sec%60)).slice(-2); }
+function toggleItem(id){
+  var i=itemIndex(id);
+  if(i>=0) session.items.splice(i,1);
+  else { var e=exById(id); session.items.push({ id:e.id, name:e.name, reps:repsToInt(e.reps), movementLengthSec:4, restAfterSec:30 }); }
+  renderLibrary();
+}
+function open(name, id){ view={name:name,id:id||null}; window.scrollTo(0,0); render(); }
+
+function setCTA(opt){
+  if(!opt){ $('#cta').innerHTML=''; return; }
+  if(opt.full){
+    $('#cta').innerHTML='<button class="cta full" '+(opt.disabled?'disabled':'')+'>'+esc(opt.label)+'</button>';
+  } else {
+    $('#cta').innerHTML='<button class="cta" '+(opt.disabled?'disabled':'')+'><span>'+esc(opt.left)+
+      '</span><span>'+esc(opt.right)+'</span></button>';
+  }
+  var btn=$('#cta .cta'); if(btn && opt.action && !opt.disabled) btn.onclick=opt.action;
+}
+
+// ---------- finish: return session to pkjs ----------
+function finish(){
+  // strip to the fields the watch needs (fully-resolved items)
+  var payload = { version:1, name:session.name, settings:session.settings,
+    items: session.items.map(function(it){ return {
+      name: it.name, reps: it.reps,
+      movementLengthSec: it.movementLengthSec, restAfterSec: it.restAfterSec }; }) };
+  document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(payload));
+}
+
+// ---------- boot ----------
+seed();
+fetch('exercises.json').then(function(r){ return r.json(); }).then(function(data){
+  EXERCISES = data; reconcile(); render();
+}).catch(function(err){
+  $('#app').innerHTML='<header><h1>Pilatable</h1></header>'+
+    '<div class="empty">Couldn’t load the exercise library.<br><small>'+esc(err)+'</small></div>';
+});
 </script>
 </body>
 </html>
