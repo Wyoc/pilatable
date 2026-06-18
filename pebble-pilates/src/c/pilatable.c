@@ -13,9 +13,10 @@ static Session s_session;
 static Settings s_settings;
 
 static void prv_session_received(const Session *session, const Settings *settings) {
-  // Already persisted by comm; applies next launch.
-  APP_LOG(APP_LOG_LEVEL_INFO, "Synced '%s' (%d items) — applies next launch",
-          session->name, session->item_count);
+  // Already persisted by comm. Live-apply on the review screen; otherwise it
+  // takes effect on the next launch (handled by runner_apply_session).
+  APP_LOG(APP_LOG_LEVEL_INFO, "Synced '%s' (%d items)", session->name, session->item_count);
+  runner_apply_session(session, settings);
 }
 
 static void prv_init(void) {

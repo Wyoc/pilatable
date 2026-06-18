@@ -9,3 +9,8 @@
 void runner_init(const Session *session, const Settings *settings);
 void runner_push(void);
 void runner_deinit(void);
+
+// Apply a freshly-synced session while running. Live-updates the plan-review
+// screen if the workout hasn't started; ignored mid-workout (it was persisted
+// and will be used on the next launch).
+void runner_apply_session(const Session *session, const Settings *settings);
