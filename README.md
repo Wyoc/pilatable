@@ -72,3 +72,8 @@ as continuous breathing.
 This repository holds the watchapp (C, Pebble SDK) and the companion
 configuration page. See [pebble-pilates/README.md](pebble-pilates/README.md) for
 build and install instructions.
+
+## Credits
+
+App icon: [Pilates icon](https://www.flaticon.com/free-icon/pilates_2320695) by
+Freepik on Flaticon, used under the Flaticon Free License (attribution required).
